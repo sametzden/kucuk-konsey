@@ -36,17 +36,17 @@ Routine (bulut, her akşam) → bilgisayar kapalıyken çalışır
 
 Her birim 2 gün – 1 hafta, sonunda gösterilebilir bir çıktı var.
 
-### Birim 1: Varys, tek hisse (ASELS) ← şu an
+### Birim 1: Varys, tek hisse (ASELS) ✅ 21 Eylül
 - [x] Repo iskeleti, `.mcp.json`
 - [x] borsa-mcp testi: KAP araçları bozuk (Mynet kazıması), fiyat/bilanço sağlam
 - [x] `kap/metin.py`: HTML → temiz metin, bozulunca bağırır
-- [ ] Test (internetsiz, kayıtlı sayfa ile)
-- [ ] `kap/server.py`: MCP sunucusu, 2 araç + disk cache
-- [ ] Claude Code'a bağla, elle dene
-- [ ] `CLAUDE.md` + Varys subagent + KAP okuma skill'i
-- [ ] **Çıktı:** ASELS için ilk kuzgun (`kuzgunlar/2026-09-21.md`)
+- [x] Test (internetsiz, kayıtlı sayfa ile)
+- [x] `kap/server.py`: MCP sunucusu, 2 araç + disk cache
+- [x] Claude Code'a bağla, elle dene
+- [x] `CLAUDE.md` + Varys subagent + KAP okuma skill'i
+- [x] **Çıktı:** ASELS için ilk kuzgun (`kuzgunlar/2026-09-21.md`)
 
-### Birim 2: Konsey
+### Birim 2: Konsey ← sıradaki
 - Serçeparmak, Ateş, Buz, Tyrion, Samwell
 - `/konsey` komutu: tek komutla tüm akış
 - `hisar/` hafızası: hisse tezi, kavramlar, tarihli iddialar
@@ -90,3 +90,13 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 - Her sayı kaynağıyla birlikte yazılır.
 - Veri gelmezse sessizce boş dönülmez, hata verilir.
 - Açıklayamadığım kod commit edilmez.
+
+## Bulgular günlüğü
+
+- **21.09 · borsa-mcp KAP araçları sessizce boş dönüyor.** Mynet'in sayfa tasarımına bağlı kazıma kırılmış,
+  araç `successful_count: 1` diyor. → Kendi `kap` sunucumuz, XBRL form yapısına bağlı.
+- **21.09 · Aynı oran iki araçta farklı:** ASELS F/K 48,09 (`get_financial_ratios`) vs 41,21 (`get_sector_comparison`).
+- **21.09 · Bizim sunucuda da sessiz boşluk vardı:** finansal raporda metin `""` dönüyordu. → Açık `uyari` alanı + test.
+- **21.09 · Cache, kod değişince bayatlar:** eski formatta cache'lenmiş sonuçlar elle silindi.
+  İleride cache anahtarına sürüm eklenmeli.
+- **21.09 · İlk kuzgun:** 10 bildirim, 2 🔴 · 2 🟡 · 6 ⚪. Brief'teki 4 sayının 4'ü de kaynağıyla doğrulandı (elle).

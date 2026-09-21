@@ -21,3 +21,11 @@ def test_yapi_yoksa_bagirir():
     # Sayfa yapısı değişirse boş sonuç değil hata bekliyoruz.
     with pytest.raises(BildirimOkunamadi):
         bildirim_metni("<html><body><p>tasarım değişti</p></body></html>")
+
+
+def test_finansal_rapor_metinsiz_ama_uyarili():
+    sonuc = bildirim_metni((FIXTURE.parent / "asels_1643141_finansal.html").read_text())
+
+    assert sonuc["ozet"] == "30 Haziran 2026 Finansal Tabloları"
+    assert sonuc["metin"] == ""
+    assert "uyari" in sonuc

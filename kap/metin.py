@@ -37,4 +37,12 @@ def bildirim_metni(html: str) -> dict:
             "Ne özet ne metin bulundu. KAP sayfa yapısı değişmiş olabilir."
         )
 
-    return {"ozet": ozet, "metin": "\n\n".join(bloklar)}
+    sonuc = {"ozet": ozet, "metin": "\n\n".join(bloklar)}
+    if not bloklar:
+        # Özet var ama metin yok: finansal rapor, faaliyet raporu gibi içeriği ekte ya da
+        # tabloda olan bildirimler. Boş metni "içerik yok" diye okunmaya bırakmıyoruz.
+        sonuc["uyari"] = (
+            "Metin alanı yok. İçerik büyük ihtimalle ekte (PDF) veya tablolarda; "
+            "bu araç onları okumaz. Rakamlar için borsa MCP'nin bilanço araçlarını kullan."
+        )
+    return sonuc
