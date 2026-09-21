@@ -1,0 +1,17 @@
+[project]
+name = "kucuk-konsey"
+version = "0.1.0"
+description = "Küçük Konsey: BIST için KAP araştırma ajanları"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.0",
+    "borsapy",
+    "beautifulsoup4",
+    "httpx",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

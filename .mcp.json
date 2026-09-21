@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "borsa": {
+      "type": "http",
+      "url": "https://borsa.surucu.dev/mcp"
+    },
+    "kap": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "python", "-m", "kap.server"]
+    }
+  }
+}
