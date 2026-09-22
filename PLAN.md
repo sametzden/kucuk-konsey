@@ -22,15 +22,15 @@ Westeros arayüzü (React, lokal) ← markdown + trace JSONL okur
 Routine (bulut, her akşam) → bilgisayar kapalıyken çalışır
 ```
 
-| Ajan | Görev |
-| --- | --- |
-| Varys | KAP bildirimlerini toplar, önem sınıfı verir |
-| Serçeparmak | Bilanço ve rakamlar; her sayı kaynaklı |
-| Ateş / Buz | Boğa ve ayı tezi |
-| Tyrion | Konseyi dinler, günlük brief (kuzgun) yazar |
-| Samwell | Günün kavramı, terim açıklamaları, haftalık ters test |
-| Bran | Haftalık yansıtma: yazılan iddia vs gerçekleşen |
-| Ozan | Mühendislik bulgularından X taslağı (onaysız paylaşmaz, hisse yorumu yok) |
+| Ajan        | Görev                                                                     |
+| ----------- | ------------------------------------------------------------------------- |
+| Varys       | KAP bildirimlerini toplar, önem sınıfı verir                              |
+| Serçeparmak | Bilanço ve rakamlar; her sayı kaynaklı                                    |
+| Ateş / Buz  | Boğa ve ayı tezi                                                          |
+| Tyrion      | Konseyi dinler, günlük brief (kuzgun) yazar                               |
+| Samwell     | Günün kavramı, terim açıklamaları, haftalık ters test                     |
+| Bran        | Haftalık yansıtma: yazılan iddia vs gerçekleşen                           |
+| Ozan        | Mühendislik bulgularından X taslağı (onaysız paylaşmaz, hisse yorumu yok) |
 
 ## Sıra
 
@@ -98,5 +98,41 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 - **21.09 · Aynı oran iki araçta farklı:** ASELS F/K 48,09 (`get_financial_ratios`) vs 41,21 (`get_sector_comparison`).
 - **21.09 · Bizim sunucuda da sessiz boşluk vardı:** finansal raporda metin `""` dönüyordu. → Açık `uyari` alanı + test.
 - **21.09 · Cache, kod değişince bayatlar:** eski formatta cache'lenmiş sonuçlar elle silindi.
-  İleride cache anahtarına sürüm eklenmeli.
+  İleride cache anahtarına sürüm eklenmeli. → **22.09'da yapıldı:** `AYRISTIRICI_SURUM`, cache `v<n>/` altında.
 - **21.09 · İlk kuzgun:** 10 bildirim, 2 🔴 · 2 🟡 · 6 ⚪. Brief'teki 4 sayının 4'ü de kaynağıyla doğrulandı (elle).
+- **22.09 · Uyuyan sunucu oturumu sakat bırakıyor.** `borsa` MCP kullanılmayınca sıfıra iniyor; ilk istek
+  ~13 sn, uyanana kadar `503 no available server`. Oturum açılırken uykudaysa araçlar o oturumda **hiç
+  görünmüyor**, ajan tekrar bile deneyemiyor. → `scripts/uyandir.sh`, oturumdan önce çalıştırılır.
+- **22.09 · "Araç yok" ile "veri yok" farklı teşhislerdir.** Serçeparmak'ın ilk denemesi araçsız kaldı;
+  uydurmadı, doğru raporladı — ama kuralımızda geçici/kalıcı hata ayrımı yoktu. → Üç durumlu tablo CLAUDE.md'de.
+- **22.09 · Kaynak, araç adından ibaret değil.** `get_financial_ratios` metadata'da `source: isyatirim`
+  diyor, dipnotta F/K'nın Yahoo Finance'ten geldiğini yazıyor. `get_quote` (yfinance) F/K'yı hiç vermiyor,
+  PD/DD veriyor. Dünkü 48,09 vs 41,21 farkının muhtemel sebebi bu sağlayıcı karışımı.
+  → Kuzgun tablosuna ayrı **Sağlayıcı** sütunu.
+- **22.09 · Veri elindeyken sessiz boşluk.** Serçeparmak tahsilat kalemini "okunamadı" saydı, oysa
+  `get_financial_statements` varsayılan olarak üç tabloyu birden döndürüyor ve `İşletme Faaliyetlerinden
+  Kaynaklanan Net Nakit` aynı yanıttaydı. Kur etkisi için de `Parasal net yabancı para pozisyonu` vardı.
+  → Ajana "yanıtı sonuna kadar oku" kuralı + hisse dosyalarına **Kalem karşılıkları** tablosu.
+- **22.09 · Çeyreklik veri birikimliymiş — çözüldü.** 12 dönemlik desen kesin: gelir her yıl Q1'de
+  sıfırlanıp Q4'e kadar artıyor (2024: 20,9 → 48,2 → 80,9 → 157,3 mlr; 2025: 29,8 → 71,0 → 90,9 → 212,5;
+  2026: 34,3 → 88,5). Ticari alacaklarda desen yok → o bir bakiye. **Akım kalemleri birikimli, stok
+  kalemleri dönem sonu.** ASELS 2026 ikinci çeyreği tek başına 54,2 mlr TL. Yan bulgu: ASELS gelirinin
+  yarısına yakını üç yıldır Q4'te yazılıyor — teslimatlar yıl sonunda yığılıyor.
+- **22.09 · `cashflow` tablosunun her kalemi akım değil.** `Parasal net yabancı para pozisyonu` ve
+  `Net YPP` bakiye (Q1 18,3 → Q2 10,9, düşüyor). Kalemin adı değil, 12 dönemlik deseni karar verir.
+- **22.09 · Aynı kalemde hassasiyet farkı.** ASELS ticari alacaklar: çeyrekler bine yuvarlı (`…000`),
+  2025/Q4 tam lira (103.562.185.820). Hata değil; o dönemin farklı yoldan geldiğinin parmak izi.
+- **22.09 · `source` alanı hep sağlayıcı değil.** `get_financial_statements` → `borsapy` (kütüphane adı,
+  gerçek sağlayıcıyı söylemiyor); `get_quote` → `yfinance`; `get_financial_ratios` → `isyatirim` + Yahoo
+  dipnotu. Sağlayıcı sütunu olmasa bu görünmezdi.
+- **22.09 · `last_n=8` nakit akış tablosunu bayatlatıyor (üst kaynak hatası).** ASELS: `last_n=8` →
+  bilanço/gelir 2026Q2'ye kadar, **nakit akış 2025Q2'de kalıyor** (4 dönem), 3/3 tekrarlandı.
+  `last_n=4` ve `last_n=12` düzgün. THYAO/TUPRS/EREGL'de sorun yok → sembol+parametre birlikte tetikliyor.
+  Araç hata vermiyor, `failed_count: 0`. **Bozuk yolu ajana biz gösterdik:** rehberde `last_n: 8` yazıyordu.
+  → Rehber `last_n: 12`, ayrıca **üç tablonun dönemlerini karşılaştırma** zorunlu kontrolü.
+- **22.09 · Sayaç kontrolü yetmez.** `failed_count: 0` diyen yanıtın parçaları birbiriyle tutarsız
+  olabilir. Yeni kural: bir yanıtın iç tutarlılığı (dönem, ölçek) ayrıca doğrulanır.
+- **22.09 · Dönem etiketi formatı sabit değil.** GARAN nakit akış dönemleri `2026-06-30` gibi tarih,
+  sanayi şirketlerinde `2026Q2`. Ajan etiketi çevirmeden aktarır.
+- **22.09 · Toplu çağrı ölçümü:** 5 hisse × 4 çeyrek bilanço = tek çağrı, 11,5 sn, **70 KB**. Beş ayrı çağrı
+  beş ayrı gidiş-dönüş olurdu. 70 KB alt-ajanın bağlamına giriyor, ana oturuma değil.

@@ -7,6 +7,9 @@
 Cache:
   liste  → bellekte 10 dk (yeni bildirim gelebilir, kısa ömürlü)
   metin  → diskte kalıcı (yayınlanan bildirim değişmez, düzeltmeler yeni id ile gelir)
+
+Cache anahtarı ayrıştırıcı sürümünü içerir: KAP'taki veri değişmese de onu işleyen kod
+değişirse diskteki çıktı bayattır. metin.py'ın çıktısı her değiştiğinde AYRISTIRICI_SURUM artar.
 """
 
 import json
@@ -20,7 +23,8 @@ from mcp.server.mcpserver import MCPServer
 from kap.metin import bildirim_metni
 
 KAP_URL = "https://www.kap.org.tr/tr/Bildirim/{id}"
-CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache" / "kap"
+AYRISTIRICI_SURUM = 1  # metin.py'ın çıktısı değişince artır
+CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache" / "kap" / f"v{AYRISTIRICI_SURUM}"
 LISTE_TTL = 600  # saniye
 
 server = MCPServer(
@@ -90,7 +94,12 @@ def kap_bildirim_metni(bildirim_id: str) -> dict:
     yanit = httpx.get(url, timeout=30, follow_redirects=True)
     yanit.raise_for_status()
 
-    sonuc = {"id": bildirim_id, "url": url, **bildirim_metni(yanit.text)}
+    sonuc = {
+        "id": bildirim_id,
+        "url": url,
+        "surum": AYRISTIRICI_SURUM,
+        **bildirim_metni(yanit.text),
+    }
 
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     dosya.write_text(json.dumps(sonuc, ensure_ascii=False, indent=2))

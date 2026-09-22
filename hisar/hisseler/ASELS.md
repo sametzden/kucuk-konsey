@@ -1,7 +1,49 @@
 ---
 sembol: ASELS
+sirket: Aselsan Elektronik Sanayi ve Ticaret A.Ş.
+sektor: Savunma elektroniği
+eklendi: 2026-09-21
+izleme: aktif
 ---
-# ASELS
+# ASELS — Aselsan
+
+Savunma elektroniği üreticisi: haberleşme, radar, elektronik harp, optik ve silah sistemleri.
+Geliri ağırlıklı olarak Savunma Sanayii Başkanlığı ve TSK ile imzalanan uzun vadeli
+sözleşmelerden gelir; sözleşmelerin önemli kısmı döviz cinsindendir.
+
+## Ne izliyoruz
+
+- **Yeni sözleşme bildirimleri** — tutar, para birimi ve teslim yılı. Tek tek küçük görünse de
+  bakiyeyi büyüten şey bunlar.
+- **Bakiye sipariş (backlog)** — imzalanmış ama henüz teslim edilmemiş işlerin toplamı; şirketin
+  önümüzdeki yıllara taşıdığı garantili iş yükü.
+- **Kur etkisi** — sözleşmeler dövizli, maliyetin bir kısmı TL. Kur hareketi kârı iki yönden etkiler.
+- **Alacaklar ve tahsilat** — kamuya satış yapan şirkette ciro büyürken nakit gecikebilir.
+
+### Kalem karşılıkları
+
+Araçlardaki gerçek kalem adları (22.09.2026'da `get_financial_statements` çıktısından doğrulandı).
+Serçeparmak bunları arayacak:
+
+| İzlediğimiz | Tablo | Kalem adı |
+| --- | --- | --- |
+| Tahsilat | `cashflow` | `İşletme Faaliyetlerinden Kaynaklanan Net Nakit` · `Serbest Nakit Akım` |
+| Alacaklar | `balance` | `Ticari Alacaklar` |
+| Ciro (tahsilatla karşılaştırmak için) | `income` | `Satış Gelirleri` |
+| Kur etkisi | `cashflow` | `Parasal net yabancı para varlık/(yükümlülük) pozisyonu` · `Net YPP (Hedge Dahil)` |
+| Döviz geliri payı | `cashflow` | `Yurtiçi Satışlar` · `Yurtdışı Satışlar` |
+| Yeni sözleşmeler | — | Borsa araçlarında yok; KAP bildirimi, **Varys'ın işi** |
+| Bakiye sipariş (backlog) | — | Bu araçların hiçbirinde yok. Faaliyet raporundan elle okunur |
+
+`income` ve `cashflow` kalemleri **yıl başından itibaren birikimlidir** (2026Q2 = ilk 6 ay);
+`balance` kalemleri dönem sonu bakiyesidir. Tek çeyrek isteniyorsa fark alınır.
+ASELS'te gelirin yaklaşık yarısı Q4'te yazılıyor — teslimatlar yıl sonunda yığılıyor (2023-2025'te üç kez).
+
+## Açık tezler
+
+_(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
+
+- yok
 
 ## Önemli bildirimler
 
