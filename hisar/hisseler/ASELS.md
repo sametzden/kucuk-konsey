@@ -43,7 +43,10 @@ ASELS'te gelirin yaklaşık yarısı Q4'te yazılıyor — teslimatlar yıl sonu
 
 _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 
-- yok
+- [[ASELS-ates-2027Q2-satis-gelirleri]] · ateş · kontrol 2027Q2
+- [[ASELS-ates-2027Q2-yurtdisi-satislar]] · ateş · kontrol 2027Q2
+- [[ASELS-buz-2027Q2-isletme-faaliyetlerinden-net-nakit]] · buz · kontrol 2027Q2
+- [[ASELS-buz-2027Q2-serbest-nakit-akim]] · buz · kontrol 2027Q2
 
 ## Önemli bildirimler
 
