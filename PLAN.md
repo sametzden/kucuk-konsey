@@ -180,7 +180,7 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 - **23.09 · Kalıcı çözüm adayı: MKK API Portal** — KAP'ın resmî, ücretsiz veri servisleri + KAP "Finansal Tablo
   Kalem Sorgulama" (2016'dan beri XBRL kalemleri). İş Yatırım verisiyle çapraz doğrulama imkânı. İnceleniyor.
 
-- **23.09 · İlk 5 hisselik tam `/konsey` turu (lokal borsa, 20 dk).** 15 yeni iddia (ASELS 7 · EREGL 3 · GARAN 5),
+- **23.09 · İlk 5 hisselik tam `/konsey` turu (lokal borsa, 20 dk).** 10 yeni iddia, defterde toplam 15 (ASELS 7 · EREGL 3 · GARAN 5),
   korumalı bölümlere dokunulmadı (diff ile doğrulandı). Açılan borçlar:
   - **THYAO: sıfır kalem.** "Ne izliyoruz" operasyonel göstergeler (trafik, birim gelir/maliyet, yakıt) istiyor,
     bu araçlarda yok → Ateş/Buz çağrılmadı (doğru davranış). THYAO'nun listesi finansal tablo kalemlerine
