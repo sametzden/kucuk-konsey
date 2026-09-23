@@ -93,7 +93,8 @@ her yıl Q1'de sıfırlanıp Q4'e kadar artıyor (2024: 20,9 → 48,2 → 80,9 �
   birikimli veride Q2 her yıl Q1'den büyüktür, bu yüzden çeyreği bir önceki çeyrekle kıyaslamak
   mevsimselliği büyüme sanmaktır (23.09'da Ateş bu tuzağa düştü: 54,2 > 34,3 dedi, ama 2024 ve 2025'te
   de Q2 > Q1). Doğru kıyas geçen yılın aynı dönemidir; o satır tabloda yoksa tez yazan ajan bu kıyası yapamaz.
-  Bakiye kalemleri (bilanço) için bu zorunlu değil.
+  **Bakiye kalemleri için de aynı:** geçen yılın aynı dönem sonunu yaz. Bakiyede birikim yoktur ama
+  mevsimsellik olabilir (alacaklar teslimatlarla birlikte yıl içinde dalgalanır).
 - Yeni bir hissede bu deseni **doğrula** (Q1'de sıfırlanıp artıyor mu): bankalarda ve farklı
   raporlama yapan şirketlerde değişebilir. Desen belirsizse o zaman belirsizliği yaz.
 

@@ -59,17 +59,25 @@ Hisse başına **en fazla 3 tez**. Az ve sağlam olan, çok ve gevşek olandan i
 
 **"Yanıldığımı şundan anlarım" en önemli satır.** Bran bu satırı ileride gerçekleşen veriyle
 kıyaslayacak. Bu yüzden koşul:
-- **ölçülebilir** olmalı. "Tahsilat zayıflarsa" yetmez; "2026/Q4'te İşletme Faaliyetlerinden Kaynaklanan
-  Net Nakit (12 aylık birikimli) negatif kalırsa" gibi yazılmalı.
+- **ölçülebilir** olmalı. "Tahsilat zayıflarsa" yetmez; "2026/Q3'te İşletme Faaliyetlerinden Kaynaklanan
+  Net Nakit (9 aylık birikimli) geçen yılın aynı dönemine göre azalırsa" gibi yazılmalı.
 - gelecekteki bir Serçeparmak tablosunun ya da Varys raporunun **gerçekten okuyabileceği** bir
   kalem üzerine kurulmalı. Kalem karşılıkları tablosundaki veya "Ne izliyoruz"daki kalemler bu işe
   yarar. "Bu araçlarda yok" denmiş bir kalem (ör. bakiye sipariş) koşul olamaz, çünkü denetlenemez.
-- **aynı pencerede** olmalı. Bugünkü sayı 6 aylık birikimliyse, koşuldaki sayı da ya bir sonraki
-  yılın 6 aylık birikimlisi olmalı ya da pencere değişiyorsa eşik de ona göre yeniden kurulmalı.
-  Örnek hata (23.09): 0,93'lük alacak/ciro oranı **6 aylık** ciroyla hesaplandı, koşul **12 aylık**
-  ciroyla yazıldı. Payda ikiye katlandığı için oran, alacak hiç değişmese de ~0,4'e düşer ve tez
-  gerçekler yüzünden değil, **ölçü kaydığı için** "yanlışlanmış" görünür. Pencereyi değiştirmek
-  yerine en temiz yol: aynı kalemi bir sonraki yılın aynı döneminde kontrol et.
+- **en yakın dönemde** kontrol edilmeli. Kontrol dönemi, bugünkü en yeni dönemden **sonra açıklanacak
+  ilk çeyrektir** (en yeni dönem Q2 ise Q3; Q4 ise ertesi yılın Q1). Yaklaşık açıklanma ayları:
+  Q1 → Mayıs, Q2 → Ağustos, Q3 → Kasım, Q4 → Mart. Bir yıl sonrasını beklemek, iddianın bir yıl
+  boyunca denetlenemeyeceği demektir.
+- **pencere kaymadan** yazılmalı. Kontrol çeyreğinde akım kalemleri farklı uzunlukta birikir (Q2 6 ay,
+  Q3 9 ay). Bu yüzden akım kalemi içeren bir koşulun eşiğini bugünkü **mutlak** sayıya bağlama; koşulu
+  kontrol dönemi ile **geçen yılın aynı dönemi** arasındaki kıyas olarak yaz: kalem (kontrol dönemi,
+  birikim süresi) geçen yılın aynı dönemine göre nominal %N'den az/çok değişirse. Akım içeren oranlar
+  (ör. alacak / ciro) için de aynısı: oran, kontrol döneminde geçen yılın aynı dönemindeki değerinin
+  altına/üstüne çıkarsa. **Bakiye (dönem sonu) kalemleri de böyle:** birikim yoktur ama mevsimsellik
+  olabilir (alacaklar teslimatlarla yıl içinde dalgalanır). Eşiği onlarda da geçen yılın aynı dönem sonuna göre kur.
+  23.09 hatası: 6 aylık ciroyla hesaplanan 0,93'lük alacak/ciro oranı, 12 aylık ciroyla kıyaslanmıştı.
+  Payda ikiye katlanınca oran alacak hiç değişmese de düşer ve tez gerçekler yüzünden değil,
+  **ölçü kaydığı için** "yanlışlanmış" görünür.
 - **sayısal eşik** taşımalı. "Belirgin", "anlamlı", "ciddi" gibi kelimeler eşik değildir.
 - **makul mesafede** olmalı. Eşik, bugünkü değerden o kadar uzak olmamalı ki pratikte asla
   gerçekleşmesin (65,5 mlr'lık pozisyon için "negatife dönerse" böyle bir koşul). Kendine sor: "bu

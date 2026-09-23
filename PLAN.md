@@ -75,13 +75,13 @@ Her birim 2 gün – 1 hafta, sonunda gösterilebilir bir çıktı var.
 
 Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 
-| Nerede | Ne | Neden |
-| --- | --- | --- |
-| KAP bildirim metni | **Kalıcı disk cache** (id → metin) | Yayınlanan bildirim değişmez; düzeltmeler yeni id ile gelir. Aynı sayfayı bir daha indirmeye gerek yok |
-| KAP listesi, fiyat | **Kısa ömürlü cache (TTL)**, ör. 10 dk | Değişen veri; kısa süre içinde tekrar sorulursa ağa gitme |
-| Ajan maliyeti | Claude Code prompt cache'i otomatik; bizim işimiz sabit metni (CLAUDE.md, skill) sabit tutmak | Değişen metin cache'i bozar |
-| Arayüz | Trace JSONL'i baştan okumak yerine kaldığı yerden okumak (offset) · canlı akış için SSE · React'ta gereksiz yeniden çizimi önlemek (memo) | Dosyalar büyüdükçe arayüz yavaşlamasın |
-| Genel kural | **Önce ölç, sonra cache'le.** Cache'in bedeli bayat veridir; neyin ne kadar bayat olabileceğine veri tipine göre karar ver | |
+| Nerede             | Ne                                                                                                                                        | Neden                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| KAP bildirim metni | **Kalıcı disk cache** (id → metin)                                                                                                        | Yayınlanan bildirim değişmez; düzeltmeler yeni id ile gelir. Aynı sayfayı bir daha indirmeye gerek yok |
+| KAP listesi, fiyat | **Kısa ömürlü cache (TTL)**, ör. 10 dk                                                                                                    | Değişen veri; kısa süre içinde tekrar sorulursa ağa gitme                                              |
+| Ajan maliyeti      | Claude Code prompt cache'i otomatik; bizim işimiz sabit metni (CLAUDE.md, skill) sabit tutmak                                             | Değişen metin cache'i bozar                                                                            |
+| Arayüz             | Trace JSONL'i baştan okumak yerine kaldığı yerden okumak (offset) · canlı akış için SSE · React'ta gereksiz yeniden çizimi önlemek (memo) | Dosyalar büyüdükçe arayüz yavaşlamasın                                                                 |
+| Genel kural        | **Önce ölç, sonra cache'le.** Cache'in bedeli bayat veridir; neyin ne kadar bayat olabileceğine veri tipine göre karar ver                |                                                                                                        |
 
 ## Değişmez kurallar
 
@@ -153,3 +153,13 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 - **23.09 · Ajan kuralları üç dosyada kopya** (Serçeparmak, Ateş, Buz). Terim kuralı bu yüzden iki kez eksik
   kaldı. Ajan davranışı oturunca ortak kurallar tek skill'e taşınacak.
 
+- **23.09 · Kontrol ufku: dört iddianın dördü 11 ay sonraya (2027/Q2) yazılmıştı** — talimattaki "bir sonraki
+  yılın aynı dönemi" örneği kopyalandı. → Kontrol = en yakın açıklanacak çeyrek, **YoY göreli eşik**
+  (Q3 9 aylık vs geçen yılın Q3 9 aylığı). Bakiye kalemleri de YoY (alacaklar mevsimsel olabilir), istisna kaldırıldı.
+- **23.09 · Tekrar önleyici dosya adı farklı iddiayı yutabiliyordu.** Ad kalemden türeyince "yurtdışı satış
+  büyümesi" ile "yurtdışı satış payı" aynı adı alıyordu; ikincisi sessizce atlanacaktı. Tyrion fark edip
+  kuralı esnetti. → Ad, koşulun **ölçtüğü büyüklükten** (`olcu`) türer.
+- **23.09 · LLM denetimi deterministik değil.** Tyrion aynı kuzgunda bir turda 0, diğerinde 1 "Dikkat" buldu
+  (Buz Tez 2: 6 aylık farktan gelen mutlak eşik 9 aylıkta kullanılmış; birikimli farklar toplanabilir olduğu
+  için koşul "Q3 tek başına YoY iyileşti mi" demek, iddia geçerli sayıldı). → Birim 4'teki atıf bekçisi
+  **Python script** olacak, model değil. Model denetimi ikinci göz, bekçi değil.

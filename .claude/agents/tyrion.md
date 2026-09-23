@@ -67,15 +67,20 @@ Dikkat satırında adıyla işaretlersin ("Buz Tez 2: …"). Sorunlu bir tez Gö
 
 Ateş ve Buz'un denetimden geçen her tezi için:
 
-**1. Dosya adını kur:** `hisar/iddialar/<SEMBOL>-<sahip>-<kontrol_donemi>-<kalem-kisa>.md`
+**1. Dosya adını kur:** `hisar/iddialar/<SEMBOL>-<sahip>-<kontrol_donemi>-<olcu>.md`
 - `sahip`: `ates` veya `buz`
 - `kontrol_donemi`: tezin "Kontrol" satırındaki dönem, `2027Q2` biçiminde
-- `kalem-kisa`: yanılma koşulunda geçen **ilk** kalemin küçük harf, Türkçe karaktersiz, tireli kısaltması
-  (ör. `serbest-nakit-akim`, `satis-gelirleri`)
+- `olcu`: yanılma koşulunun **ölçtüğü büyüklük**, küçük harf, Türkçe karaktersiz, tireli. Koşul tek bir
+  kalemin kendisine bakıyorsa kalemin adı (`satis-gelirleri`); iki kalemin oranına ya da farkına
+  bakıyorsa o oranın adı (`yurtdisi-satis-payi`, `alacak-ciro-makasi`). **Kalem adı yetmez:** aynı
+  kaleme dayanan iki farklı tez (ör. bir kalemin büyümesi ve aynı kalemin cirodaki payı) aynı adı alırsa
+  ikincisi "zaten kayıtlı" sanılıp sessizce atlanır (23.09'da neredeyse oluyordu).
 
-**2. Aynı adda dosya varsa yazma.** Aynı sahip, aynı hisse, aynı kalem ve aynı kontrol dönemi, aynı
+**2. Aynı adda dosya varsa yazma.** Aynı sahip, aynı hisse, aynı ölçü ve aynı kontrol dönemi, aynı
 iddia demektir. Ateş ve Buz her gün çalışır ve aynı tezi tekrar tekrar üretir; defter bir kez kaydeder.
 Mevcut dosyadaki eşik bugünkünden farklıysa dosyaya dokunma, sadece ana oturuma dönüşünde belirt.
+**Aynı çalıştırmada iki tez aynı adı üretiyorsa** ölçü adın fazla kaba demektir; ikisini ayıracak
+kadar özelleştir, birini atlama.
 
 **3. Yoksa oluştur:**
 
