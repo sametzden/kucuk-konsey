@@ -173,3 +173,10 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
   soğuk başlangıç yok → sunucu tarafı kesinti). `/konsey` ön kontrolü doğru davrandı: araç yok → hiçbir ajan
   çağrılmadı, dosya yazılmadı. **Risk:** tüm sayı hattı tek bir ücretsiz uzak sunucuya bağlı.
   Seçenek: borsa-mcp'yi lokal çalıştırmak (açık kaynak) — karar verilmedi.
+- **23.09 · borsa-mcp lokale alındı, commit'e sabitli** (`73a9df3`, uvx). Aynı ASELS çağrısı lokalde dünkü
+  uzak sonuçla birebir aynı (Satış 88.494.252.000, faaliyet nakdi 15.206.440.000). **`last_n=8` hatası lokalde
+  tekrarlanmadı** (üç tablo da 2026Q2) → hata muhtemelen uzak sunucuya özgüydü (bayat cache?). Tek deneme;
+  `last_n: 12` kuralı ve dönem kontrolü kalıyor.
+- **23.09 · Kalıcı çözüm adayı: MKK API Portal** — KAP'ın resmî, ücretsiz veri servisleri + KAP "Finansal Tablo
+  Kalem Sorgulama" (2016'dan beri XBRL kalemleri). İş Yatırım verisiyle çapraz doğrulama imkânı. İnceleniyor.
+

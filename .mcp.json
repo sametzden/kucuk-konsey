@@ -1,6 +1,11 @@
 {
   "mcpServers": {
     "borsa": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/saidsurucu/borsa-mcp@73a9df3e6e0e25a3e986514667301b110880dbc0", "borsa-mcp"]
+    },
+    "borsa-uzak": {
       "type": "http",
       "url": "https://borsa.surucu.dev/mcp"
     },

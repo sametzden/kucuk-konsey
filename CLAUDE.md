@@ -20,16 +20,18 @@ ajan ekibi. Samet tahtta, ajanlar Küçük Konsey üyeleri. Dil Türkçe. Genel 
 - `borsa` MCP (uzak): fiyat, bilanço, oranlar. **KAP araçları bozuk, kullanma.** Farklı araçlar aynı
   oran için farklı değer verebilir (ör. F/K 48,09 vs 41,21); hangi araçtan geldiğini yaz.
 
-### Oturum açmadan önce
+### borsa sunucusu: lokal (23.09'dan beri)
 
-```bash
-./scripts/uyandir.sh && claude
-```
+`borsa` MCP artık bu bilgisayarda çalışıyor: `.mcp.json` içinde `uvx` ile, **belirli bir commit'e sabitli**
+(`saidsurucu/borsa-mcp@73a9df3`). Oturum açılınca Claude Code sunucuyu kendisi başlatır; uyandırma gerekmez.
+Sabitlemenin anlamı: yazar yeni kod gönderse de bizimki değişmez; sürümü **biz** güncelleriz (SHA'yı değiştirerek).
 
-`borsa` sunucusu kullanılmadığında sıfıra iniyor. Uykudayken oturum açarsan Claude Code ona
-bağlanamaz ve `mcp__borsa__*` araçları **o oturum boyunca hiç görünmez** — ajan "veri alamadım"
-değil, "araç yok" durumuna düşer ve tekrar deneyemez. Script sunucuyu 200 dönene kadar dürter.
-Oturum içinde `/mcp` ile bağlantıyı doğrula, ajanı ondan sonra çalıştır.
+Uzak sunucu (`borsa.surucu.dev`) `borsa-uzak` adıyla tanımlı ama kapalı (`settings.local.json` →
+`disabledMcpjsonServers`). 23.09'da uzak sunucu kesintiye girdi; ona dönülürse `./scripts/uyandir.sh && claude`
+yine gerekir. Araç adları iki durumda da aynı (`mcp__borsa__*`), ajanlar farkı görmez.
+
+**Veri zinciri:** borsa-mcp'nin kendi verisi yok. Bilanço/gelir/nakit akış → `borsapy` → İş Yatırım; fiyat ve
+bazı oranlar → Yahoo Finance. Lokal kurulum Said'in sunucusunu zincirden çıkarır, İş Yatırım/Yahoo'yu çıkarmaz.
 
 ### Hata karşısında davranış (bütün ajanlar için)
 
