@@ -67,7 +67,7 @@ Her birim 2 gün – 1 hafta, sonunda gösterilebilir bir çıktı var.
 - **Çıktı:** ilk ölçüm tablosu → Ozan'ın ilk X taslağı
 
 ### Birim 5: Bulut
-- GitHub private repo + routine (her iş günü ~18:30)
+- GitHub private repo + routine (Pzt/Çrş/Cum ~18:30)
 - Kendi MCP sunucumuz için bulut kurulum script'i
 - **Çıktı:** bilgisayar kapalıyken oluşan bir haftalık kuzgun
 
@@ -220,7 +220,7 @@ anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoru
        feed sunucusu ve bozulan adres bakımı gerekirdi). Kuzgun sonunda `## Gündem`, Tyrion'da **Dünya** satırı. KAP > haber.
 5. [x] Samwell kalıyor (Samet, 23.09).
 6. [ ] `/konsey` sırasını güncelle, 5 hisseyle tam tur, çıktıyı Samet'in gözüyle oku (1 dakikada okunuyor mu?).
-7. [ ] Ritim: haftada 3 (routine, Birim 5). 
+7. [ ] Ritim: haftada 3, Pzt/Çrş/Cum 18:30 (Samet 23.09 onayladı; routine, Birim 5).
 8. [x] Web iskeleti + sahne + parçalar (23.09, `d297da7`, `4ecbe7b`). **Ekran görüntüsünden düzeltilecekler:**
    - Üst sıradaki hane rozetleri (ASELS/EREGL/GARAN) Serçeparmak/Tyrion/Varys isim etiketlerinin üstüne biniyor → rozetleri aşağı al.
    - Panelde markdown ham görünüyor: `([KAP 1666885](https://...))` → bağlantıya çevir; metindeki 🔴 emojisi mühür görseli olsun.
@@ -232,7 +232,7 @@ Park: kap ayrıştırıcı (15 okunamayan bildirim türü), iddia eşik güncell
 
 - Ortak veri/tez sözleşmesi `hisar/kurallar.md`; doğrulanmamış tanımlardan çıkarım engeli.
 - Sanayi/banka çekirdek katalogları ve hisse format etiketleri; Serçeparmak kataloğa bağlandı.
-- Tyrion v2, en fazla 220 kelime; mevcut rapor özeti güncellendi, tarihsel tezler korundu.
+- Tyrion v2, en fazla 220 kelime (23.09 deneme turundan sonra 400: 220 telgraf diline itiyordu); mevcut rapor özeti güncellendi, tarihsel tezler korundu.
 - Şüpheli döviz iddiası incelemeye işaretlendi; gerçekleşme durumu değiştirilmedi.
 - Web API diskten güncel raporu okur; teknik kayıt katlanır, kaynak bağlantıları tıklanır.
 - Özet biçim bekçisi eklendi; finansal doğruluk/atıf bekçisinin yerini tutmaz.

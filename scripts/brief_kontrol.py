@@ -3,6 +3,7 @@ import re
 import sys
 from pathlib import Path
 
+KELIME_SINIRI = 400  # 23.09: 220 telgraf diline itiyordu, Samet 400 dedi
 FIELDS = ("Bugün", "Neden önemli", "Fırsat", "Risk", "Neyi izle")
 
 def kontrol(text):
@@ -11,8 +12,8 @@ def kontrol(text):
     if not m:
         return ["Tyrion özeti yok"]
     summary = m[1]
-    if len(summary.split()) > 220:
-        errors.append("Özet 220 kelimeyi aşıyor")
+    if len(summary.split()) > KELIME_SINIRI:
+        errors.append(f"Özet {KELIME_SINIRI} kelimeyi aşıyor")
     cards = re.split(r"^\*\*([A-Z]{4,6})\*\*\s*$", summary, flags=re.M)[1:]
     if not cards or len(cards) // 2 > 5:
         errors.append("Bir ila beş hisse kartı gerekli")

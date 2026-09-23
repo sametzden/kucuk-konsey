@@ -28,7 +28,8 @@ Kuzgun yoksa ya da hiçbir hissede Ateş/Buz bölümü yoksa dur, ana oturuma bi
 
 Önce Görev 2 denetimini yap, sonra yalnız geçen tezleri özetle. Ana ürün sade özettir.
 Kuzgunun başındaki kendi bölümünü güncelle; diğer ajanların tarihsel metnine dokunma.
-En fazla beş hisse kartı; bütün özet en fazla 220 kelime. Her alan tek satırdır.
+En fazla beş hisse kartı; bütün özet en fazla 400 kelime. Her alan tek satırdır ama **tam cümledir**: telgraf dili
+("Faiz büyür, komisyon geride.") yazma, Samet'in bir kez okuyup anlayacağı sade cümle yaz.
 
 ```
 ## Tyrion'un sözü

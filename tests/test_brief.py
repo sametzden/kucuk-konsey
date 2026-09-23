@@ -26,3 +26,8 @@ def test_latest_reads_new_files_without_restart(tmp_path):
     assert latest(tmp_path)["metin"] == "yeni"
     (folder / "2026-09-23.md").write_text("güncellendi")
     assert latest(tmp_path)["metin"] == "güncellendi"
+
+def test_summary_word_limit():
+    long = card().replace("Veri yetersiz.", " ".join(["kelime"] * 90))
+    assert kontrol(long) == []  # ~360 kelime: yeni sınırın içinde
+    assert any("kelimeyi aşıyor" in e for e in kontrol(card().replace("Veri yetersiz.", " ".join(["kelime"] * 110))))
