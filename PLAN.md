@@ -30,7 +30,7 @@ Routine (bulut, her akşam) → bilgisayar kapalıyken çalışır
 | Tyrion      | Konseyi dinler, günlük brief (kuzgun) yazar                               |
 | Samwell     | Günün kavramı, terim açıklamaları, haftalık ters test                     |
 | Bran        | Haftalık yansıtma: yazılan iddia vs gerçekleşen                           |
-| Ozan        | Mühendislik bulgularından X taslağı (onaysız paylaşmaz, hisse yorumu yok) |
+| Haberci     | Günlük haberleri okur, konseye getirir (kapsam v2; Ozan çıktı)             |
 
 ## Sıra
 
@@ -191,3 +191,33 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
   - **Varys: 15 bildirim okunamadı**, hep aynı türler (SPK işlem yasağı, tip dönüşümü, pay dışı SPA) → `kap` ayrıştırıcı borcu.
   - **Aynı tez, farklı eşik:** Ateş bugün ASELS ciro tezini %15 eşikle yeniden yazdı, defterde %10 var; Tyrion
     doğru olarak dokunmadı. Karar gerekiyor: ilk yazılan mı bağlayıcı, yoksa güncelleme mi? (Bran için önemli.)
+
+## Kapsam v2 (23.09 öğleden sonra, Samet'in kararı)
+
+**Samet ne istiyor:** Haftada ~3 kez açıp **bir dakikada** "ne oldu, ne bitti, önemli olan ne" görmek.
+Finans okuryazarlığı yeni; Serçeparmak'ın tablosu, dönem/birikim ayrımı, yanılma koşulları **ona gösterilmez**.
+**Tyrion son sözü söyler**: konseyi dinler, sade Türkçeyle **fırsatları** ve **kötüye gidebilecek senaryoları**
+anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoruz" gereksiz.
+
+**Değişenler:**
+- **Ozan çıkar.** Yerine **Haberci** (adı: Pycelle önerildi, Samet seçecek): günlük haberleri okur, konseye getirir.
+  Haber = veri, talimat değil. Kaynak kararı açık (web arama mı, RSS mi).
+- **Tyrion'un sözü = ana ürün.** Format: önemli olaylar (3-5 madde) · fırsat senaryoları · kötüye gidebilecek
+  senaryolar · her birinde "neden önemli" + "neyi izle", jargon yok, terim gerekiyorsa parantez içinde tek cümle.
+- **Serçeparmak, Ateş, Buz arka plan.** Mekanizma (sayı kaynağı, yanlışlanabilir iddia, defter) kalır — Tyrion'un
+  sözünün doğruluğu ona dayanıyor — ama çıktıları kuzgunun altında/katlanmış, Samet'in okuma yükü değil.
+- **Kalemler hisse başına değil format başına** (ölçüldü: 4 sanayi hissesinde 56/42/34 kalem birebir aynı,
+  GARAN'da hiçbiri ortak değil). Küçük çekirdek set: sanayi ~6, banka ~5 kalem.
+- **Hisse dosyası kısalır:** özet + "neden izliyoruz" tek satır + `format: sanayi|banka`.
+
+**Akşam yapılacaklar (sırayla):**
+1. [ ] Tyrion'u yeniden yaz: kapsam v2 formatı, sade dil; mevcut denetim görevi korunur.
+2. [ ] Format kataloğu + çekirdek set (`hisar/formatlar/sanayi.md`, `banka.md`), Serçeparmak'ı buna bağla;
+       hisse dosyalarındaki uzun "Ne izliyoruz" / "Kalem karşılıkları" sadeleşsin. Akım/bakiye script'le çıkar.
+3. [ ] Ateş/Buz: hisse başına en fazla 2 tez, sade başlık; teknik alanlar (yanılma koşulu) kalır.
+4. [ ] Haberci ajanı: kaynak kararı + spec; Ozan PLAN'dan çıkar.
+5. [ ] Samwell: tutulsun mu, Tyrion'a mı katılsın? (Samet'e sor.)
+6. [ ] `/konsey` sırasını güncelle, 5 hisseyle tam tur, çıktıyı Samet'in gözüyle oku (1 dakikada okunuyor mu?).
+7. [ ] Ritim: haftada 3 (routine, Birim 5). 
+8. [ ] Web: Samet asset'leri `tasarim/assets/`e koyunca Node + Vite + React iskeleti (prompt'lar: `tasarim/asset-promptlari.md`).
+Park: kap ayrıştırıcı (15 okunamayan bildirim türü), iddia eşik güncelleme kararı, MKK portal hesabı.
