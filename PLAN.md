@@ -168,3 +168,8 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
   bölümü (Ateş'in gözü · Buz'un gözü · ayırt edecek veri). İkinci turda soru tersine döndü: "bu sayı tahsilat
   sorununu kesin gösterir mi? Hayır." Yapı, talimattan güçlü.
 - **23.09 · Terim taraması da deterministik değil:** Samwell bir turda "mevsimsellik", diğerinde "SSB/TSK" buldu.
+- **23.09 · Tek 200 yanıtı "sunucu ayakta" demek değil.** `uyandir.sh` 200 aldı, 14 sn sonra açılan oturum 503
+  aldı; ardından 1 dk boyunca 12/12 deneme `no available server`, yanıt 0,28 sn (uyku değil, 13 sn'lik
+  soğuk başlangıç yok → sunucu tarafı kesinti). `/konsey` ön kontrolü doğru davrandı: araç yok → hiçbir ajan
+  çağrılmadı, dosya yazılmadı. **Risk:** tüm sayı hattı tek bir ücretsiz uzak sunucuya bağlı.
+  Seçenek: borsa-mcp'yi lokal çalıştırmak (açık kaynak) — karar verilmedi.
