@@ -212,12 +212,13 @@ anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoru
 - **Hisse dosyası kısalır:** özet + "neden izliyoruz" tek satır + `format: sanayi|banka`.
 
 **Akşam yapılacaklar (sırayla):**
-1. [ ] Tyrion'u yeniden yaz: kapsam v2 formatı, sade dil; mevcut denetim görevi korunur.
-2. [ ] Format kataloğu + çekirdek set (`hisar/formatlar/sanayi.md`, `banka.md`), Serçeparmak'ı buna bağla;
-       hisse dosyalarındaki uzun "Ne izliyoruz" / "Kalem karşılıkları" sadeleşsin. Akım/bakiye script'le çıkar.
-3. [ ] Ateş/Buz: hisse başına en fazla 2 tez, sade başlık; teknik alanlar (yanılma koşulu) kalır.
-4. [ ] Varys'a haber görevi: kaynak kararı (web arama / RSS), kaynak etiketi, KAP ile haberin ayrı ağırlığı.
-5. [ ] Samwell: tutulsun mu, Tyrion'a mı katılsın? (Samet'e sor.)
+1. [x] Tyrion'u yeniden yaz: kapsam v2 formatı, sade dil; mevcut denetim görevi korunur. (23.09, Codex denemesi)
+2. [~] Format kataloğu + çekirdek set (`hisar/formatlar/sanayi.md`, `banka.md`), Serçeparmak'ı buna bağla. Yapıldı.
+       Açık: hisse dosyalarındaki uzun "Ne izliyoruz" / "Kalem karşılıkları" sadeleşmedi; akım/bakiye script'i yok.
+3. [x] Ateş/Buz: hisse başına en fazla 2 tez; teknik alanlar (yanılma koşulu) kalır.
+4. [x] Varys'a haber görevi (23.09): kaynak = WebSearch/WebFetch + sabit konu listesi `hisar/gundem.md` (RSS değil:
+       feed sunucusu ve bozulan adres bakımı gerekirdi). Kuzgun sonunda `## Gündem`, Tyrion'da **Dünya** satırı. KAP > haber.
+5. [x] Samwell kalıyor (Samet, 23.09).
 6. [ ] `/konsey` sırasını güncelle, 5 hisseyle tam tur, çıktıyı Samet'in gözüyle oku (1 dakikada okunuyor mu?).
 7. [ ] Ritim: haftada 3 (routine, Birim 5). 
 8. [x] Web iskeleti + sahne + parçalar (23.09, `d297da7`, `4ecbe7b`). **Ekran görüntüsünden düzeltilecekler:**
@@ -226,3 +227,28 @@ anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoru
    - Samwell'in başı Ateş'in isim etiketini örtüyor → Samwell biraz sağa/aşağı.
    - Panel metni çok uzun → Tyrion kapsam v2 formatına geçince kısalacak; ayrıştırıcıyı (`web/src/kuzgun.ts`) aynı anda güncelle.
 Park: kap ayrıştırıcı (15 okunamayan bildirim türü), iddia eşik güncelleme kararı, MKK portal hesabı.
+
+## 23.09 · İnceleme sonrası uygulama
+
+- Ortak veri/tez sözleşmesi `hisar/kurallar.md`; doğrulanmamış tanımlardan çıkarım engeli.
+- Sanayi/banka çekirdek katalogları ve hisse format etiketleri; Serçeparmak kataloğa bağlandı.
+- Tyrion v2, en fazla 220 kelime; mevcut rapor özeti güncellendi, tarihsel tezler korundu.
+- Şüpheli döviz iddiası incelemeye işaretlendi; gerçekleşme durumu değiştirilmedi.
+- Web API diskten güncel raporu okur; teknik kayıt katlanır, kaynak bağlantıları tıklanır.
+- Özet biçim bekçisi eklendi; finansal doğruluk/atıf bekçisinin yerini tutmaz.
+- Operasyonel KAP eklerini okuma, yeni canlı konsey turu ve bulut ritmi hâlâ bekliyor.
+
+## 23.09 akşam · Ada denetimi (Codex çıktısı üzerine)
+
+Codex bir kez denendi, bu projede kullanılmayacak; `.codex/`, `.agents/`, `AGENTS.md` silindi.
+- **Geri alındı:** `kurallar.md`'nin "tanım yoksa dönem dönüşümü ve kıyas yok" maddesi. borsapy tanım vermediği
+  için bu, konseyi fiilen susturuyordu. Yeni kural: tür = format kataloğu `Tür` sütunu, birikimlilik = BIST
+  3/6/9/12 aylık raporlama, Satış Gelirleri deseni sağlama. Codex'in haklı yakaladığı nokta korundu:
+  birikimli nakit akışı negatif çeyrekte düşebilir → "düşüyor = bakiye" sağlaması kalktı.
+- **Geri yüklendi:** Serçeparmak'tan silinen birikim/YoY/mevsimsellik kuralları (22-23.09 dersleri).
+- **Tutuldu:** Buz Tez 3 (hedge oranı) incelemede; eski Tyrion'un Buz Tez 2 koşulunu yanlış aktarması
+  (oran farkı ≠ büyüme farkı) doğru bulgu.
+- **Zayıf:** 23.09 Tyrion özetini Codex elle yazdı, aşırı sade (ASELS sözleşmesinin büyüklüğü bile yok).
+  Gerçek sınav madde 6: canlı turda Tyrion ajanının kendisi yazacak.
+- Web artık iki süreç: `python3 scripts/web_server.py` (veri, :8765) + `npm --prefix web run dev`.
+  Açık: rozet/isim etiketi çakışması, Samwell konumu, 🔴 → mühür görseli.

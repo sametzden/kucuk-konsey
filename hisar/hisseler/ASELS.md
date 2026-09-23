@@ -4,6 +4,7 @@ sirket: Aselsan Elektronik Sanayi ve Ticaret A.Ş.
 sektor: Savunma elektroniği
 eklendi: 2026-09-21
 izleme: aktif
+format: sanayi
 ---
 # ASELS — Aselsan
 

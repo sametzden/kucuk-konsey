@@ -1,12 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AJANLAR, type Ajan } from './ajanlar'
 import { sonKuzgun, type Kuzgun } from './kuzgun'
 import './App.css'
-
-// Veriyi bir kez, bileşenlerin dışında okuyoruz: dosya derleme anında paketlendi, değişmiyor.
-const kuzgun = sonKuzgun()
+import { Metin } from './Metin'
 
 export default function App() {
+  const [kuzgun, setKuzgun] = useState<Kuzgun | null>(null)
+  const [hata, setHata] = useState('')
+  const [yukleniyor, setYukleniyor] = useState(true)
+  useEffect(() => {
+    let controller: AbortController | undefined
+    const yenile = async () => {
+      controller?.abort()
+      controller = new AbortController()
+      const signal = controller.signal
+      try {
+        const result = await sonKuzgun(signal)
+        if (!signal.aborted) { setKuzgun(result); setHata('') }
+      } catch (error) {
+        if (!signal.aborted) setHata(error instanceof Error ? error.message : 'Rapor okunamadı')
+      } finally { if (!signal.aborted) setYukleniyor(false) }
+    }
+    // Konsey günde bir kez toplanır; sürekli sormak yerine sayfa açılınca ve sekmeye dönülünce sor.
+    void yenile()
+    const gorundu = () => { if (document.visibilityState === 'visible') void yenile() }
+    document.addEventListener('visibilitychange', gorundu)
+    return () => { document.removeEventListener('visibilitychange', gorundu); controller?.abort() }
+  }, [])
   // useState: bileşenin hatırladığı değer. [şimdiki değer, değiştiren fonksiyon].
   const [seciliAjan, setSeciliAjan] = useState<string>('tyrion')
   const [seciliHisse, setSeciliHisse] = useState<string | null>(null)
@@ -21,6 +41,8 @@ export default function App() {
         <span className="rozet-altin piksel">Konsey ({AJANLAR.filter((a) => !a.yolda).length})</span>
       </header>
 
+      {yukleniyor && <p role="status">Kuzgun okunuyor…</p>}
+      {hata && <p role="alert">{hata} {kuzgun ? 'Son okunabilen rapor gösteriliyor.' : ''}</p>}
       <main className="govde">
         <Sahne seciliAjan={seciliAjan} onAjanSec={setSeciliAjan}>
           {kuzgun?.hisseler.map((s, i) => (
@@ -92,16 +114,22 @@ function KralinMasasi({ kuzgun, seciliHisse }: { kuzgun: Kuzgun | null; seciliHi
       <p className="piksel soluk">{seciliHisse ? `${seciliHisse} hanesi · tümü için haneye tekrar tıkla` : 'Bütün haneler'}</p>
 
       <h3><img src="/assets/parca/parsomen.png" alt="" className="ikon" /> Tyrion'un sözü</h3>
+      {kuzgun.dunya && !seciliHisse && <p><b>Dünya:</b> <Metin text={kuzgun.dunya} /></p>}
       {filtre(kuzgun.soz).map((s) => (
         <article key={s.sembol} className="parsomen">
           <div className="piksel altin">{s.sembol}</div>
-          {s.bugun && <p><b>Bugün:</b> {s.bugun}</p>}
-          <p>{s.catisma}</p>
-          {s.cozecek && <p className="soluk"><b>Neyi izle:</b> {s.cozecek}</p>}
-          {s.dikkat && <p className="uyari"><b>Dikkat:</b> {s.dikkat}</p>}
+          {s.bugun && <p><b>Bugün:</b> <Metin text={s.bugun} /></p>}
+          {s.neden && <p><b>Neden önemli:</b> <Metin text={s.neden} /></p>}
+          {s.firsat && <p><b>Fırsat:</b> <Metin text={s.firsat} /></p>}
+          {s.risk && <p><b>Risk:</b> <Metin text={s.risk} /></p>}
+          {s.catisma && <p><Metin text={s.catisma} /></p>}
+          {s.cozecek && <p className="soluk"><b>Neyi izle:</b> <Metin text={s.cozecek} /></p>}
+          {s.dikkat && <p className="uyari"><b>Dikkat:</b> <Metin text={s.dikkat} /></p>}
         </article>
       ))}
 
+      {kuzgun.soz.length === 0 && <p role="status">Bu raporun Tyrion özeti henüz hazır değil.</p>}
+      <details><summary>Teknik kayıt ve özgün tezler</summary><pre className="teknik-kayit">{kuzgun.metin.slice(Math.max(0, kuzgun.metin.search(/^## [A-Z]{4,6}$/m)))}</pre></details>
       <h3><img src="/assets/parca/muhur-kirmizi.png" alt="" className="ikon" /> Kırmızı mühürler</h3>
       {filtre(kuzgun.muhurler).map((m) => (
         <div key={m.sembol + m.baslik} className="muhur-satir">

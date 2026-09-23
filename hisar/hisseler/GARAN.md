@@ -4,6 +4,7 @@ sirket: Türkiye Garanti Bankası A.Ş.
 sektor: Bankacılık
 eklendi: 2026-09-22
 izleme: aktif
+format: banka
 ---
 # GARAN — Garanti BBVA
 

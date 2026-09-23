@@ -4,6 +4,7 @@ sirket: Türkiye Petrol Rafinerileri A.Ş.
 sektor: Rafineri / enerji
 eklendi: 2026-09-22
 izleme: aktif
+format: sanayi
 ---
 # TUPRS — Tüpraş
 

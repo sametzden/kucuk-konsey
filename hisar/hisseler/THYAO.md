@@ -4,6 +4,7 @@ sirket: Türk Hava Yolları A.O.
 sektor: Havacılık
 eklendi: 2026-09-22
 izleme: aktif
+format: sanayi
 ---
 # THYAO — Türk Hava Yolları
 

@@ -13,7 +13,8 @@ Samet başka bir tarih verdiyse onu kullan.
 ## 0. Ön kontrol
 
 - `mcp__borsa__*` ve `mcp__kap__*` araçları listende var mı? Yoksa **dur**: "borsa/kap MCP bağlı değil.
-  `./scripts/uyandir.sh && claude` ile oturumu yeniden aç." Araçsız konsey toplanmaz.
+  `.mcp.json`'u kontrol edip oturumu yeniden aç (lokal borsa uyandırma istemez; uzak sunucuya
+  dönüldüyse `./scripts/uyandir.sh && claude`)." Araçsız konsey toplanmaz.
 - `hisar/hisseler/*.md` dosyalarını tara, frontmatter'ında `izleme: aktif` olanları al. Liste başka
   hiçbir yerden gelmez.
 - `kuzgunlar/<tarih>.md` zaten varsa dur ve Samet'e sor: üstüne mi eklenecek, iptal mi?
@@ -22,7 +23,7 @@ Samet başka bir tarih verdiyse onu kullan.
 
 İkisi de kuzguna yazar; aynı anda çalışırlarsa birbirinin yazdığını ezebilirler. Bu yüzden **sırayla**:
 
-1. `varys` ajanı: bütün aktif hisseler, tek çağrı.
+1. `varys` ajanı: bütün aktif hisseler + gündem taraması, tek çağrı.
 2. `serceparmak` ajanı: bütün aktif hisseler, tek çağrı.
 
 Serçeparmak hiçbir sayı toplayamadıysa dur ve nedenini Samet'e söyle; tezsiz, sayısız konsey olmaz.
@@ -44,6 +45,12 @@ Bir ajan tez kurmadığını söylediyse ("Serçeparmak tablosu yok" gibi) o cü
 
 ## 4. Samet'e dönüş
 
-Kısa tablo: hisse başına Varys bildirim sayısı · Serçeparmak kalem/okunamayan sayısı · Ateş ve Buz
+Kısa tablo: Varys gündem madde sayısı · hisse başına Varys bildirim sayısı · Serçeparmak kalem/okunamayan sayısı · Ateş ve Buz
 tez sayısı · Tyrion Dikkat sayısı. Altına: yeni iddia sayısı, günün kavramı, ve **bir ajanın durduğu,
 hata verdiği ya da boş döndüğü her adım** (sessiz geçme).
+
+## Yayın öncesi kontrol
+
+Ana oturum `python scripts/brief_kontrol.py kuzgunlar/<tarih>.md` çalıştırır.
+Hata varsa tur başarılı sayılmaz; Tyrion kendi bölümünü düzeltir. `hisar/kurallar.md`
+bütün ajanlara uygulanır. Samwell dersini Tyrion özetinin içine eklemez.

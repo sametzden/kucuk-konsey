@@ -1,32 +1,19 @@
-# React + TypeScript + Vite
+# Küçük Konsey arayüzü
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Üretim kullanımı (repo kökünden):
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm --prefix web run build
+python3 scripts/web_server.py
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+http://127.0.0.1:8765 adresini aç. Sunucu sadece yerel bilgisayarda dinler; repo dosyalarını
+statik olarak sunmaz, yalnız web/dist ve son rapor API'sini sunar. Yeni kuzgun dosyası her
+istekte diskten okunur. Arayüz sayfa açılınca ve sekmeye dönülünce raporu yeniden sorar; rapor için yeniden derleme gerekmez.
+Sunucu hata verirse son okunabilen rapor hata mesajıyla korunur.
+
+Geliştirme: veri sunucusu açıkken başka terminalde `npm --prefix web run dev`.
+Vite /api isteklerini yerel veri sunucusuna aktarır. `vite preview` tek başına API sağlamaz.
+
+Özet v2: Bugün, Neden önemli, Fırsat, Risk, Neyi izle, isteğe bağlı Dikkat.
+Eski Çatışma/Çözecek veri biçimi de okunur. Özgün tezler teknik kayıt altında saklanır.

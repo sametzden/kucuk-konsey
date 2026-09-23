@@ -1,12 +1,9 @@
 // Veri katmanı: ajanların yazdığı kuzgun markdown dosyasını okur, arayüzün ihtiyacı olanı çıkarır.
 // React'ten bağımsız; ileride başka bir ekran da aynı fonksiyonları kullanabilir.
 
-export type Soz = { sembol: string; bugun: string; catisma: string; cozecek: string; dikkat?: string }
+export type Soz = { sembol: string; bugun: string; catisma: string; cozecek: string; dikkat?: string; neden?: string; firsat?: string; risk?: string }
 export type Muhur = { sembol: string; tarih: string; baslik: string; kap?: string; url?: string }
-export type Kuzgun = { tarih: string; soz: Soz[]; muhurler: Muhur[]; hisseler: string[] }
-
-// import.meta.glob: Vite, derleme anında bu kalıba uyan bütün dosyaları metin (?raw) olarak paketler.
-const dosyalar = import.meta.glob('../../kuzgunlar/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+export type Kuzgun = { tarih: string; soz: Soz[]; muhurler: Muhur[]; hisseler: string[]; metin: string; dunya?: string }
 
 function bolum(metin: string, baslik: string): string {
   // "## <baslik>" ile bir sonraki "## " arasındaki metin
@@ -22,7 +19,7 @@ function sozuAyikla(metin: string): Soz[] {
   const sonuc: Soz[] = []
   for (let i = 0; i < parcalar.length; i += 2) {
     const alan = (ad: string) => parcalar[i + 1].match(new RegExp(`\\*\\*${ad}:\\*\\*\\s*(.+)`))?.[1]?.trim() ?? ''
-    sonuc.push({ sembol: parcalar[i], bugun: alan('Bugün'), catisma: alan('Çatışma'), cozecek: alan('Çözecek veri'), dikkat: alan('Dikkat') || undefined })
+    sonuc.push({ sembol: parcalar[i], bugun: alan('Bugün'), catisma: alan('Çatışma'), cozecek: alan('Neyi izle') || alan('Çözecek veri'), dikkat: alan('Dikkat') || undefined, neden: alan('Neden önemli'), firsat: alan('Fırsat'), risk: alan('Risk') })
   }
   return sonuc
 }
@@ -36,10 +33,21 @@ function muhurleriAyikla(metin: string, hisseler: string[]): Muhur[] {
   )
 }
 
-export function sonKuzgun(): Kuzgun | null {
-  const yol = Object.keys(dosyalar).sort().at(-1) // dosya adları YYYY-MM-DD.md, alfabetik = kronolojik
-  if (!yol) return null
-  const metin = dosyalar[yol]
+export function ayikla(tarih: string, metin: string): Kuzgun {
   const hisseler = [...metin.matchAll(/^## ([A-Z]{4,6})$/gm)].map((m) => m[1])
-  return { tarih: yol.match(/(\d{4}-\d{2}-\d{2})/)![1], soz: sozuAyikla(metin), muhurler: muhurleriAyikla(metin, hisseler), hisseler }
+  // Tyrion'un sözündeki, hisse kartlarından önce gelen tek "**Dünya:**" satırı (Varys'ın Gündem'inden)
+  const dunya = bolum(metin, "Tyrion'un sözü").match(/^\*\*Dünya:\*\*\s*(.+)$/m)?.[1]?.trim()
+  return { tarih, metin, soz: sozuAyikla(metin), muhurler: muhurleriAyikla(metin, hisseler), hisseler, dunya }
+}
+
+export async function sonKuzgun(signal?: AbortSignal): Promise<Kuzgun | null> {
+  const response = await fetch('/api/kuzgun', { cache: 'no-store', signal })
+  if (!response.ok) throw new Error('Rapor okunamadı. Yerel veri sunucusunu kontrol et.')
+  const data: unknown = await response.json()
+  if (data === null) return null
+  if (typeof data !== 'object' || !('tarih' in data) || !('metin' in data) ||
+      typeof data.tarih !== 'string' || typeof data.metin !== 'string') {
+    throw new Error('Rapor yanıtı beklenen biçimde değil.')
+  }
+  return ayikla(data.tarih, data.metin)
 }

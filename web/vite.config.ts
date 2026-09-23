@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 // dosyaları sunmaz; bir üst klasöre okuma izni veriyoruz.
 export default defineConfig({
   plugins: [react()],
-  server: { fs: { allow: ['..'] } },
+  server: { proxy: { '/api': 'http://127.0.0.1:8765' } },
 })

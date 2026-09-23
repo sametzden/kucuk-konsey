@@ -62,3 +62,7 @@
   35% { left: 105%; top: 20%; opacity: 1; }
   36%, 100% { left: 105%; opacity: 0; }
 }
+
+.teknik-kayit { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }
+.masa a { color: #e8c778; text-decoration: underline; }
+.masa details { margin: 1rem 0; }

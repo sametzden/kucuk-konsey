@@ -4,6 +4,7 @@ sirket: Ereğli Demir ve Çelik Fabrikaları T.A.Ş.
 sektor: Demir-çelik
 eklendi: 2026-09-22
 izleme: aktif
+format: sanayi
 ---
 # EREGL — Erdemir
 
