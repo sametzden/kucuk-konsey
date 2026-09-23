@@ -1,0 +1,6 @@
+:root { --zemin: #0f0c0a; --panel: #17120f; --cizgi: #3a2c20; --metin: #efe6d6; --soluk: #b3a58f; --altin: #e3b341; --kan: #b3261e; }
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; }
+body { background: var(--zemin); color: var(--metin); font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+a { color: var(--altin); }
+button { font: inherit; color: inherit; }
