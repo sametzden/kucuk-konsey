@@ -220,5 +220,9 @@ anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoru
 5. [ ] Samwell: tutulsun mu, Tyrion'a mı katılsın? (Samet'e sor.)
 6. [ ] `/konsey` sırasını güncelle, 5 hisseyle tam tur, çıktıyı Samet'in gözüyle oku (1 dakikada okunuyor mu?).
 7. [ ] Ritim: haftada 3 (routine, Birim 5). 
-8. [ ] Web: Samet asset'leri `tasarim/assets/`e koyunca Node + Vite + React iskeleti (prompt'lar: `tasarim/asset-promptlari.md`).
+8. [x] Web iskeleti + sahne + parçalar (23.09, `d297da7`, `4ecbe7b`). **Ekran görüntüsünden düzeltilecekler:**
+   - Üst sıradaki hane rozetleri (ASELS/EREGL/GARAN) Serçeparmak/Tyrion/Varys isim etiketlerinin üstüne biniyor → rozetleri aşağı al.
+   - Panelde markdown ham görünüyor: `([KAP 1666885](https://...))` → bağlantıya çevir; metindeki 🔴 emojisi mühür görseli olsun.
+   - Samwell'in başı Ateş'in isim etiketini örtüyor → Samwell biraz sağa/aşağı.
+   - Panel metni çok uzun → Tyrion kapsam v2 formatına geçince kısalacak; ayrıştırıcıyı (`web/src/kuzgun.ts`) aynı anda güncelle.
 Park: kap ayrıştırıcı (15 okunamayan bildirim türü), iddia eşik güncelleme kararı, MKK portal hesabı.
