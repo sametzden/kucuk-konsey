@@ -29,4 +29,17 @@ _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 
 ## Önemli bildirimler
 
+(bu turda 🔴 yok)
+
 ## Görülen bildirimler
+
+- 1666846 (22.09.2026, Temerrüt İşlemi)
+- 1666463 (22.09.2026, Temerrüt İşlemi)
+- 1666319 (21.09.2026, SPK İşlem Yasağı Nedeniyle Pay Duyurusu) — okunamadı
+- 1666193 (21.09.2026, Temerrüt İşlemi)
+- 1665472 (18.09.2026, Borsada İşlem Gören Tipe Dönüşüm Duyurusu) — okunamadı
+- 1663981 (16.09.2026, Pay Bazında Devre Kesici Bildirimi)
+- 1660523 (08.09.2026, Özel Durum Açıklaması (Genel) — Ağustos 2026 Trafik Sonuçları)
+- 1657309 (02.09.2026, Borsada İşlem Gören Tipe Dönüşüm Duyurusu) — okunamadı
+- 1653533 (20.08.2026, Borsada İşlem Gören Tipe Dönüşüm Duyurusu) — okunamadı
+- 1650390 (14.08.2026, SPK İşlem Yasağı Nedeniyle Pay Duyurusu) — okunamadı

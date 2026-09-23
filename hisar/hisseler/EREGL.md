@@ -25,8 +25,23 @@ Döngüsel bir iş: talep de fiyat da ekonominin genel gidişine bağlı sert da
 
 _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 
-- yok
+- [[EREGL-ates-2026Q3-brut-kar-marji]] · ates · kontrol 2026Q3
+- [[EREGL-buz-2026Q3-yurtdisi-satislar]] · buz · kontrol 2026Q3
+- [[EREGL-buz-2026Q3-capex]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 
+(bu turda 🔴 yok)
+
 ## Görülen bildirimler
+
+- 1666319 (21.09.2026, SPK İşlem Yasağı Nedeniyle Pay Duyurusu) — okunamadı
+- 1663520 (16.09.2026, Pay Bazında Devre Kesici Bildirimi)
+- 1655862 (28.08.2026, Borsada İşlem Gören Tipe Dönüşüm Duyurusu) — okunamadı
+- 1653533 (20.08.2026, Borsada İşlem Gören Tipe Dönüşüm Duyurusu) — okunamadı
+- 1650390 (14.08.2026, SPK İşlem Yasağı Nedeniyle Pay Duyurusu) — okunamadı
+- 1646154 (10.08.2026, Pay Bazında Devre Kesici Bildirimi)
+- 1645018 (07.08.2026, Pay Bazında Devre Kesici Bildirimi)
+- 1644587 (06.08.2026, Katılım Finansı İlkeleri Bilgi Formu)
+- 1644586 (06.08.2026, Sorumluluk Beyanı (Konsolide))
+- 1644585 (06.08.2026, Faaliyet Raporu (Konsolide))

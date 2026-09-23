@@ -180,3 +180,14 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
 - **23.09 · Kalıcı çözüm adayı: MKK API Portal** — KAP'ın resmî, ücretsiz veri servisleri + KAP "Finansal Tablo
   Kalem Sorgulama" (2016'dan beri XBRL kalemleri). İş Yatırım verisiyle çapraz doğrulama imkânı. İnceleniyor.
 
+- **23.09 · İlk 5 hisselik tam `/konsey` turu (lokal borsa, 20 dk).** 15 yeni iddia (ASELS 7 · EREGL 3 · GARAN 5),
+  korumalı bölümlere dokunulmadı (diff ile doğrulandı). Açılan borçlar:
+  - **THYAO: sıfır kalem.** "Ne izliyoruz" operasyonel göstergeler (trafik, birim gelir/maliyet, yakıt) istiyor,
+    bu araçlarda yok → Ateş/Buz çağrılmadı (doğru davranış). THYAO'nun listesi finansal tablo kalemlerine
+    çevrilmeli ya da trafik verisi KAP'tan (Varys) gelmeli.
+  - **`get_financial_ratios` GARAN/EREGL/TUPRS için `{}` döndü**, `failed_count: 0`. Yeni sessiz boşluk türü.
+  - **GARAN `Takipteki Krediler` bütün dönemlerde 0** → kalem doldurulmamış, "sıfır" değil "yok" sayılmalı.
+  - **TUPRS: tez kurulamadı** (tabloda yalnız yatırım harcaması + çelişkili temettü). Kalem karşılıkları şart.
+  - **Varys: 15 bildirim okunamadı**, hep aynı türler (SPK işlem yasağı, tip dönüşümü, pay dışı SPA) → `kap` ayrıştırıcı borcu.
+  - **Aynı tez, farklı eşik:** Ateş bugün ASELS ciro tezini %15 eşikle yeniden yazdı, defterde %10 var; Tyrion
+    doğru olarak dokunmadı. Karar gerekiyor: ilk yazılan mı bağlayıcı, yoksa güncelleme mi? (Bran için önemli.)

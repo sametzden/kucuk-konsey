@@ -46,16 +46,25 @@ _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 - [[ASELS-ates-2026Q3-satis-gelirleri]] · ates · kontrol 2026Q3
 - [[ASELS-ates-2026Q3-yurtdisi-satislar]] · ates · kontrol 2026Q3
 - [[ASELS-ates-2026Q3-yurtdisi-satis-payi]] · ates · kontrol 2026Q3
+- [[ASELS-ates-2026Q3-yurtici-satislar]] · ates · kontrol 2026Q3
 - [[ASELS-buz-2026Q3-ticari-alacaklar]] · buz · kontrol 2026Q3
 - [[ASELS-buz-2026Q3-serbest-nakit-akim]] · buz · kontrol 2026Q3
+- [[ASELS-buz-2026Q3-hedge-orani]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 
+- 23.09.2026 · ASELSAN-ROKETSAN sözleşmesi, 1.234.210.000 Euro ([KAP 1666885](https://www.kap.org.tr/tr/Bildirim/1666885))
 - 18.09.2026 · Güdüm Sistemleri Üretim Merkezi devreye alındı, 56 milyon ABD Doları ([KAP 1665180](https://www.kap.org.tr/tr/Bildirim/1665180))
 - 04.08.2026 · 30 Haziran 2026 Finansal Tabloları bildirimi ([KAP 1643141](https://www.kap.org.tr/tr/Bildirim/1643141)) — metin içeriği bu araçla okunamadı
 
 ## Görülen bildirimler
 
+- 1666979 (23.09.2026, Temerrüt İşlemi)
+- 1666885 (23.09.2026, Yeni İş İlişkisi)
+- 1666607 (22.09.2026, Temerrüt İşlemi)
+- 1666462 (22.09.2026, Temerrüt İşlemi)
+- 1666319 (21.09.2026, SPK İşlem Yasağı Nedeniyle Pay Duyurusu) — okunamadı
+- 1666209 (21.09.2026, Temerrüt İşlemi)
 - 1665180 (18.09.2026, Özel Durum Açıklaması (Genel))
 - 1663667 (16.09.2026, Pay Bazında Devre Kesici Bildirimi)
 - 1643570 (05.08.2026, Özel Durum Açıklaması (Genel))
