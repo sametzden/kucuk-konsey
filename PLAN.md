@@ -163,3 +163,8 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
   (Buz Tez 2: 6 aylık farktan gelen mutlak eşik 9 aylıkta kullanılmış; birikimli farklar toplanabilir olduğu
   için koşul "Q3 tek başına YoY iyileşti mi" demek, iddia geçerli sayıldı). → Birim 4'teki atıf bekçisi
   **Python script** olacak, model değil. Model denetimi ikinci göz, bekçi değil.
+- **23.09 · Samwell ilk turda taraf tuttu:** "taraf tutma" kuralı vardı, ders yine Buz'un okumasını olgu gibi
+  anlattı, Kendini sına'nın cevabı Buz'un teziydi. → Kural cümlesi yerine **şablon**: zorunlu "İki okuma"
+  bölümü (Ateş'in gözü · Buz'un gözü · ayırt edecek veri). İkinci turda soru tersine döndü: "bu sayı tahsilat
+  sorununu kesin gösterir mi? Hayır." Yapı, talimattan güçlü.
+- **23.09 · Terim taraması da deterministik değil:** Samwell bir turda "mevsimsellik", diğerinde "SSB/TSK" buldu.
