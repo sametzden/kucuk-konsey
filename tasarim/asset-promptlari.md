@@ -46,7 +46,7 @@ Beğendiğin sonucu kaydet: `tasarim/assets/oda.png`. Bu hem arka plan hem stil 
 ## 2. Karakter dizisi (tek görselde, tutarlılık için)
 
 ```
-[stil bloğu] Character lineup sheet, 8 characters standing side by side, same scale,
+[stil bloğu] Character lineup sheet, 7 characters standing side by side, same scale,
 same pixel density as the reference image, plain transparent background, full body, front 3/4 view:
 1) a bald, plump spymaster in flowing purple silk robes, hands clasped, calm smile
 2) a slim, sly treasurer with short dark hair and a small pointed beard, grey-green doublet,
@@ -56,10 +56,9 @@ same pixel density as the reference image, plain transparent background, full bo
 5) a warrior with fiery red-orange hair and an ember-colored cloak, confident stance
 6) a pale warrior with white-blue hair, a steel-blue fur cloak, frost on the shoulders, calm cold look
 7) a young man in a wooden wheelchair wearing a dark green cloak, a black raven on his shoulder
-8) an old grey-bearded maester in dark robes with a long chain, holding a rolled letter with a red wax seal
 ```
 
-Sıra = Varys · Serçeparmak · Tyrion · Samwell · Ateş · Buz · Bran · **Haberci (yeni üye, 8)**.
+Sıra = Varys · Serçeparmak · Tyrion · Samwell · Ateş · Buz · Bran. (Ayrı haberci yok: haberleri Varys topluyor.)
 Dizi beğenilince her karakteri tek tek iste ("make character 3 alone, same style, transparent background,
 512x512"), dosya adı: `tasarim/assets/karakter-<ad>.png`.
 

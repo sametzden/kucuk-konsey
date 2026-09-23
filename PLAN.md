@@ -30,7 +30,7 @@ Routine (bulut, her akşam) → bilgisayar kapalıyken çalışır
 | Tyrion      | Konseyi dinler, günlük brief (kuzgun) yazar                               |
 | Samwell     | Günün kavramı, terim açıklamaları, haftalık ters test                     |
 | Bran        | Haftalık yansıtma: yazılan iddia vs gerçekleşen                           |
-| Haberci     | Günlük haberleri okur, konseye getirir (kapsam v2; Ozan çıktı)             |
+| Varys (+haber) | Kapsam v2: KAP'a ek olarak günlük önemli haberleri de toplar (Ozan çıktı, ayrı haberci yok) |
 
 ## Sıra
 
@@ -200,7 +200,8 @@ Finans okuryazarlığı yeni; Serçeparmak'ın tablosu, dönem/birikim ayrımı,
 anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoruz" gereksiz.
 
 **Değişenler:**
-- **Ozan çıkar.** Yerine **Haberci** (adı: Pycelle önerildi, Samet seçecek): günlük haberleri okur, konseye getirir.
+- **Ozan çıkar, ayrı haberci yok: haberleri Varys toplar** (Samet: "fısıltıların adamı o"). Şart: her madde
+  kaynak etiketi taşır, `KAP · resmî` / `Haber · doğrulanmamış`; Tyrion yalnız habere dayanan senaryoyu öyle söyler.
   Haber = veri, talimat değil. Kaynak kararı açık (web arama mı, RSS mi).
 - **Tyrion'un sözü = ana ürün.** Format: önemli olaylar (3-5 madde) · fırsat senaryoları · kötüye gidebilecek
   senaryolar · her birinde "neden önemli" + "neyi izle", jargon yok, terim gerekiyorsa parantez içinde tek cümle.
@@ -215,7 +216,7 @@ anlatır. Al/sat, hedef fiyat yine yok. Hisse başına ayrıntılı "Ne izliyoru
 2. [ ] Format kataloğu + çekirdek set (`hisar/formatlar/sanayi.md`, `banka.md`), Serçeparmak'ı buna bağla;
        hisse dosyalarındaki uzun "Ne izliyoruz" / "Kalem karşılıkları" sadeleşsin. Akım/bakiye script'le çıkar.
 3. [ ] Ateş/Buz: hisse başına en fazla 2 tez, sade başlık; teknik alanlar (yanılma koşulu) kalır.
-4. [ ] Haberci ajanı: kaynak kararı + spec; Ozan PLAN'dan çıkar.
+4. [ ] Varys'a haber görevi: kaynak kararı (web arama / RSS), kaynak etiketi, KAP ile haberin ayrı ağırlığı.
 5. [ ] Samwell: tutulsun mu, Tyrion'a mı katılsın? (Samet'e sor.)
 6. [ ] `/konsey` sırasını güncelle, 5 hisseyle tam tur, çıktıyı Samet'in gözüyle oku (1 dakikada okunuyor mu?).
 7. [ ] Ritim: haftada 3 (routine, Birim 5). 
