@@ -31,7 +31,7 @@ export default function App() {
               onClick={() => setSeciliHisse(seciliHisse === s ? null : s)}
             >
               {s}
-              {muhurSayisi(s) > 0 && <span className="muhur">{muhurSayisi(s)}</span>}
+              {muhurSayisi(s) > 0 && <Muhur sayi={muhurSayisi(s)} />}
             </button>
           ))}
         </Sahne>
@@ -48,6 +48,7 @@ function Sahne(props: { seciliAjan: string; onAjanSec: (id: string) => void; chi
     <section className="sahne" aria-label="Konsey odası">
       <img className="oda" src="/assets/oda.png" alt="" />
       <div className="mum-isigi" />
+      <div className="kuzgun-ucus" aria-hidden="true"><div className="kuzgun" /></div>
       {props.children}
       {/* y'ye göre sırala: önde duran (y'si büyük) sonra çizilir, arkadakinin önüne geçer */}
       {[...AJANLAR].sort((a, b) => a.y - b.y).map((a) => (
@@ -82,10 +83,15 @@ function KralinMasasi({ kuzgun, seciliHisse }: { kuzgun: Kuzgun | null; seciliHi
   const filtre = <T extends { sembol: string }>(l: T[]) => (seciliHisse ? l.filter((x) => x.sembol === seciliHisse) : l)
   return (
     <aside className="masa">
-      <h2>Kralın Masası</h2>
+      <div className="masa-baslik">
+        <span className="mum" aria-hidden="true" />
+        <img src="/assets/parca/taht.png" alt="" className="taht" />
+        <h2>Kralın Masası</h2>
+        <span className="mum" aria-hidden="true" />
+      </div>
       <p className="piksel soluk">{seciliHisse ? `${seciliHisse} hanesi · tümü için haneye tekrar tıkla` : 'Bütün haneler'}</p>
 
-      <h3>Tyrion'un sözü</h3>
+      <h3><img src="/assets/parca/parsomen.png" alt="" className="ikon" /> Tyrion'un sözü</h3>
       {filtre(kuzgun.soz).map((s) => (
         <article key={s.sembol} className="parsomen">
           <div className="piksel altin">{s.sembol}</div>
@@ -96,15 +102,25 @@ function KralinMasasi({ kuzgun, seciliHisse }: { kuzgun: Kuzgun | null; seciliHi
         </article>
       ))}
 
-      <h3>Kırmızı mühürler</h3>
+      <h3><img src="/assets/parca/muhur-kirmizi.png" alt="" className="ikon" /> Kırmızı mühürler</h3>
       {filtre(kuzgun.muhurler).map((m) => (
         <div key={m.sembol + m.baslik} className="muhur-satir">
-          <span className="muhur" />
+          <img src="/assets/parca/muhur-kirmizi.png" alt="" className="ikon kucuk" />
           <span className="piksel soluk">{m.tarih}</span>
           <span><b>{m.sembol}</b> · {m.baslik}</span>
           {m.url && <a href={m.url} target="_blank" rel="noreferrer" className="piksel">{m.kap}</a>}
         </div>
       ))}
     </aside>
+  )
+}
+
+// Kırmızı mum mühür, üstünde önemli olay sayısı
+function Muhur({ sayi }: { sayi: number }) {
+  return (
+    <span className="muhur" aria-label={`${sayi} önemli olay`}>
+      <img src="/assets/parca/muhur-kirmizi.png" alt="" />
+      <b>{sayi}</b>
+    </span>
   )
 }
