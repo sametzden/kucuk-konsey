@@ -76,7 +76,7 @@ geçmiş silinmez.
 | Bölüm | Yazan | Kural |
 | --- | --- | --- |
 | Şirket özeti, **Ne izliyoruz** | Samet + Ada, elle | **Ajanlar bu bölümlere yazmaz.** Bu, ajana verilen görev tanımıdır; ajan kendi görevini kendisi yazarsa kendi çıktısını onaylamış olur |
-| Açık tezler | Ateş / Buz koyar, Bran kontrol eder | Her tez tarihli ve kaynaklı |
+| Açık tezler | Tyrion taşır (kuzguntaki Ateş/Buz tezlerinden), Bran kontrol eder | Her tez tarihli ve kaynaklı. **Ateş ve Buz hiçbir dosyaya yazmaz**: yazma araçları yok, tezlerini ana oturuma döner, ana oturum kuzguna olduğu gibi ekler. Böylece birbirlerini göremezler |
 | Önemli bildirimler | Varys | Sayı varsa KAP bağlantısıyla |
 | Görülen bildirimler | Varys | Aynı bildirimi iki kez okumamak için id listesi |
 

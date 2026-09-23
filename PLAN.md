@@ -47,7 +47,7 @@ Her birim 2 gün – 1 hafta, sonunda gösterilebilir bir çıktı var.
 - [x] **Çıktı:** ASELS için ilk kuzgun (`kuzgunlar/2026-09-21.md`)
 
 ### Birim 2: Konsey ← sıradaki
-- Serçeparmak, Ateş, Buz, Tyrion, Samwell
+- [x] Serçeparmak (22.09) · [x] Ateş, Buz (23.09) · [ ] Tyrion · [ ] Samwell
 - `/konsey` komutu: tek komutla tüm akış
 - `hisar/` hafızası: hisse tezi, kavramlar, tarihli iddialar
 - 5 hisse
@@ -136,3 +136,20 @@ Staj (OBSS) bağlamında duyulan konu; burada gerçek karşılıkları var:
   sanayi şirketlerinde `2026Q2`. Ajan etiketi çevirmeden aktarır.
 - **22.09 · Toplu çağrı ölçümü:** 5 hisse × 4 çeyrek bilanço = tek çağrı, 11,5 sn, **70 KB**. Beş ayrı çağrı
   beş ayrı gidiş-dönüş olurdu. 70 KB alt-ajanın bağlamına giriyor, ana oturuma değil.
+- **23.09 · Ateş/Buz ilk tur: sayılar doğru, zaman mantığı yanlış.** Ateş Q2 > Q1'i "ivme" saydı (her yıl
+  böyle, mevsimsellik). Buz'un yanılma koşulu 6 aylık ciroyla hesaplanan oranı 12 aylıkla kıyaslıyordu →
+  payda ikiye katlanınca tez gerçekler yüzünden değil **ölçü kaydığı için** "yanlışlanmış" görünecekti.
+  Denetim mekanizmasının kendisi yanlış sonuç üretebilir. → Serçeparmak geçen yılın aynı dönemini getirir;
+  büyüme YoY kurulur; yanılma koşulu aynı pencerede, sayısal eşikli, bir yılda gerçekleşebilir mesafede.
+- **23.09 · Talimattaki örnek kopyalanıyor.** Buz'a tek yönlü bir kur örneği yazmıştım ("TL değer kazanırsa
+  fazla erir"); Buz onu alıp pozisyonun küçülmesini de risk saydı — iki yönde aynı sonuç. → Örnek yerine
+  **sağlama**: "sayı ters yönde değişseydi de aynı sonuca mı varırdın? Öyleyse mantık hatalı." Üçüncü turda
+  hatalı tez kendiliğinden düştü.
+- **23.09 · Kalem adından tanım uydurma.** Serçeparmak "Yurtiçi/Yurtdışı satış = TL/döviz kırılımı" yazdı —
+  yanlış, coğrafya kırılımı (ASELS'in yurtiçi sözleşmeleri dövizli). → Emin olunmayan tanım "(tanım doğrulanmadı)".
+- **23.09 · Açık soru: nominal mi, enflasyon düzeltmeli mi?** Ciro YoY %24,7 **nominal**. TMS 29 (enflasyon
+  muhasebesi) altında `borsapy`'nin geçmiş dönem rakamları yeniden ifade edilmiş mi, ilk açıklanan mı —
+  doğrulanmadı. Tezler şimdilik "nominal" diye işaretleniyor, reel büyüme iddiası yasak.
+- **23.09 · Ajan kuralları üç dosyada kopya** (Serçeparmak, Ateş, Buz). Terim kuralı bu yüzden iki kez eksik
+  kaldı. Ajan davranışı oturunca ortak kurallar tek skill'e taşınacak.
+

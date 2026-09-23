@@ -87,6 +87,13 @@ her yıl Q1'de sıfırlanıp Q4'e kadar artıyor (2024: 20,9 → 48,2 → 80,9 �
   Karar verirken kalemin adına değil, **12 dönemlik desenine** bak.
 - Tek çeyreğin kendisi isteniyorsa **fark al** ve bunu belirt: ASELS 2026 ikinci çeyrek tek başına
   88,5 − 34,3 = 54,2 mlr TL.
+- **Akım kalemlerinde geçen yılın aynı dönemini de yaz.** `Satış Gelirleri 2026/Q2 (6 aylık birikimli)`
+  satırının hemen altına `2025/Q2 (6 aylık birikimli)` satırı gelir; tek çeyrek hesapladıysan geçen
+  yılın aynı tek çeyreğini de aynı yolla hesapla. `last_n: 12` bu veriyi zaten getiriyor. **Neden:**
+  birikimli veride Q2 her yıl Q1'den büyüktür, bu yüzden çeyreği bir önceki çeyrekle kıyaslamak
+  mevsimselliği büyüme sanmaktır (23.09'da Ateş bu tuzağa düştü: 54,2 > 34,3 dedi, ama 2024 ve 2025'te
+  de Q2 > Q1). Doğru kıyas geçen yılın aynı dönemidir; o satır tabloda yoksa tez yazan ajan bu kıyası yapamaz.
+  Bakiye kalemleri (bilanço) için bu zorunlu değil.
 - Yeni bir hissede bu deseni **doğrula** (Q1'de sıfırlanıp artıyor mu): bankalarda ve farklı
   raporlama yapan şirketlerde değişebilir. Desen belirsizse o zaman belirsizliği yaz.
 
@@ -164,7 +171,13 @@ sonra şirkette kalan para.
 
 **`**Terimler:**` bloğu zorunlu.** Samet finansa yeni; tabloda ilk kez geçen her terimi tek
 cümleyle açıkla (Varys de her bildirimde bunu yapıyor, kuzgunlar birbirine benzemeli). Açıklaması
-`hisar/hisseler/<SEMBOL>.md` içinde hazır duruyorsa oradaki cümleyi kullan. Açıklanacak terim yoksa
+`hisar/hisseler/<SEMBOL>.md` içinde hazır duruyorsa oradaki cümleyi kullan.
+**Terimi kalemin adından tahmin ederek tanımlama.** 23.09'da iki tanım böyle üretildi ve ikisi de
+sorunluydu: "Parasal pozisyon = Net YPP'nin hedge hariç hâli" (doğrulanmamış; iki kalem arasında 55 mlr
+fark var) ve "Yurtiçi/Yurtdışı satış = TL/döviz kırılımı" (**yanlış**: yurtiçi satış coğrafyadır, para
+birimi değil; ASELS'in yurtiçi sözleşmelerinin önemli kısmı dövizlidir). Tanımı hisse dosyasında ya da
+genel finans bilgisi olarak kesin biliyorsan yaz; bir kalemin ne içerip ne içermediğinden emin değilsen
+tanımın sonuna **"(tanım doğrulanmadı)"** ekle. Açıklanacak terim yoksa
 `**Terimler:** —` yaz, satırı atlama.
 
 Hisse başlığının hemen altına `[[<SEMBOL>]]` bağlantısı koy (Obsidian'da hisse dosyasına gider).
