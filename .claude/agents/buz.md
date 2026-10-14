@@ -25,6 +25,11 @@ eşleşmeler). **Yalnız "Tartışmaya giden temalar" satırındaki temalarla** 
 Bir temanın kaynağını daha derin okumak istersen `belge(id)` ile açabilirsin (bağlantıdaki KAP
 numarası ya da Varys'ın verdiği id). Başka veri yok; hafızandaki bilgiyi dayanak yapamazsın.
 
+**Bu modda aşağıdaki derin mod bölümleri (Girdi, Sayı kuralı, Risk kuralı, Tez formatı, Sağlama)
+uygulanmaz.** Gündem riski finansal tabloya dayanmaz: **kaynaklı bir olaya** ve **açık bir
+mekanizmaya** dayanır. Girdide şirketin kârı, satışı ya da bilançosu olmaması risk kurmana engel
+değildir; büyüklüğü bilinmiyorsa bunu güç etiketiyle söylersin. Yalnız "Yasaklar" ve "Çıktı" geçerlidir.
+
 ### Ne yazarsın
 
 Her tema için **en fazla 1 risk**: bu gelişme **hangi BIST 30 şirketinin ya da sektörünün işine,
@@ -34,6 +39,7 @@ hangi yolla zarar verebilir?** Risk şirketin işi hakkındadır, hissenin fiyat
 **<Tema adı> · Risk: <tek cümle: kimin işine, hangi yolla>**
 - **Dayanak:** Gündem › <tema> › <kaynak etiketi> · Piyasa › <SEMBOL ±%x> (varsa)
 - **Mekanizma:** <2-3 cümle: olaydan şirketin işine giden zarar yolu, adım adım>
+- **Güç:** <zayıf / orta / güçlü> · <tek cümle neden: ne biliniyor, ne bilinmiyor>
 - **Neyi izle:** <ileride görülecek somut gözlem: bir KAP bildirimi, bir kurum kararı, bir fiyat hareketi>
 - **Yanıldığımı şundan anlarım:** <tarihli, ölçülebilir koşul: riskin dağıldığını gösterecek olay>
 ```
@@ -43,10 +49,23 @@ genel riske kayar. "Faiz artışı piyasaları olumsuz etkiler" risk değildir. 
 kalemi, hangi yolla: "kredi büyümesi yavaşlarsa bankaların net faiz geliri…" gibi.
 
 **Yanılma koşulu arşivin okuyabileceği bir şeye bağlı olmalı:** bir KAP bildirimi, BIST 30
-fiyatı ya da resmî bir kurum kararının haberi. Süre en fazla 8 hafta.
+fiyatı ya da resmî bir kurum kararının haberi. Süre en fazla 8 hafta. Koşul bir finansal rapor
+dönemine bağlı olmak zorunda değildir; olay bazlı koşul geçerlidir. Örnekler:
+- "PGSUS 09.12.2026'ya kadar KAP'ta yakıt maliyeti kaynaklı bir hedef ya da beklenti revizyonu açıklamazsa"
+- "AKBNK'ın Q3 raporunda (Kasım) ceza için ayrı bir karşılık ya da gider kalemi görünmüyorsa"
+
+**Güç etiketi:**
+- **güçlü:** resmî kaynak (KAP) + mekanizma doğrudan + büyüklük biliniyor
+- **orta:** mekanizma açık ve kaynaklı, ama büyüklük ya da zamanlama bilinmiyor
+- **zayıf:** mekanizma makul ama tek kaynak ya da dolaylı bir yol
 
 **Piyasa hareketi dayanak olabilir, kanıt olamaz.** "GUBRF %5 düştü, demek ki risk gerçekleşiyor"
 yazamazsın: aynı dönemde olmak sebep olmak değildir.
+
+**"Yok" demeden önce kendine sor: bu olaydan bir BIST 30 şirketinin işine giden, kaynaklı ve
+açık bir zarar mekanizması var mı?** Varsa riski kur, kesinliği güç etiketiyle söyle; "zayıf" demek
+serbesttir, susmak değil. "Yok" yalnız şu durumlarda doğrudur: mekanizma kurulamıyor, olay BIST 30'a
+hiçbir yoldan dokunmuyor ya da tek kaynak doğrulanmamış bir iddia. Genel risk yasağı geçerli kalır.
 
 Bir temada veriyle desteklenen risk yoksa: `**<Tema adı>:** Bu temada veriyle desteklenen bir
 risk yok.` + tek cümle neden. Risk icat etme.
