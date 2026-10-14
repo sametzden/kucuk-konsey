@@ -1,15 +1,17 @@
 """Arşiv MCP sunucusu: ajanların toplayıcı veritabanına açılan kapısı.
 
-Üç araç:
-  son_belgeler → son N günün bildirim ve haberleri (gündem için, arama yapmadan)
-  ara          → kelime araması, alakaya göre sıralı
-  belge        → tek belgenin tam metni
+Dört araç:
+  son_belgeler      → son N günün bildirim ve haberleri (gündem için, arama yapmadan)
+  ara               → kelime araması, alakaya göre sıralı
+  belge             → tek belgenin tam metni
+  fiyat_hareketleri → BIST 30'da son N işlem gününün değişimi ve hacim oranı
 
 kap sunucusundan farkı: o, KAP'a canlı gider; bu, yalnız toplayıcının biriktirdiğini okur.
 """
 
 import sqlite3
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -37,35 +39,50 @@ def _baglan() -> sqlite3.Connection:
     return db
 
 
+BASLIK_MODU_EN_FAZLA = 500  # tek satırlık başlık ~25 token: 500 satır ~12 bin token
+
+
 @server.tool()
-def son_belgeler(gun: int = 3, tur: str | None = None, limit: int = 50) -> list[dict]:
+def son_belgeler(gun: int = 3, tur: str | None = None, ozetli: bool = False,
+                 limit: int = 500) -> list[dict] | list[str]:
     """Son N günün KAP bildirimlerini ve haberlerini yeniden eskiye listeler. Gündem çıkarmak için.
 
-    Rutin KAP bildirimleri (metni ve özeti olmayanlar) listeye girmez.
+    Varsayılan başlık modu: belge başına tek satır "id · kaynak[ · SEMBOL] · AA-GG · başlık"
+    (tarih UTC), böylece birkaç günün tamamı tek listeye sığar. Önce bütün başlıkları tara,
+    ilgilendiklerini belge(id) ile aç. Rutin KAP bildirimleri listeye girmez.
 
     Args:
         gun: kaç gün geriye (1-14)
         tur: "kap" ya da "haber"; boşsa ikisi de
-        limit: en fazla kaç belge (1-50)
+        ozetli: True ise her belgenin 300 karakterlik özeti de gelir (en fazla 50 belge)
+        limit: en fazla kaç belge (başlık modunda 500, özetli modda 50)
     """
     gun = max(1, min(gun, 14))
+    limit = max(1, min(limit, EN_FAZLA if ozetli else BASLIK_MODU_EN_FAZLA))
+    ozet_sutunu = f"substr(ozet, 1, {OZET_SINIRI}) AS ozet," if ozetli else ""
     sinir = (datetime.now(timezone.utc) - timedelta(days=gun)).strftime("%Y-%m-%dT%H:%M:%SZ")
     kosullar = ["yayin_zamani >= ?", "NOT (tur = 'kap' AND ozet IS NULL AND metin IS NULL)"]
     parametreler: list = [sinir]
     if tur is not None:
         kosullar.append("tur = ?")
         parametreler.append(tur)
-    parametreler.append(max(1, min(limit, EN_FAZLA)))
+    parametreler.append(limit)
 
     with _baglan() as db:
         satirlar = db.execute(
-            f"""SELECT id, tur, kaynak, sembol, baslik, substr(ozet, 1, {OZET_SINIRI}) AS ozet,
-                       url, yayin_zamani
+            f"""SELECT id, tur, kaynak, sembol, baslik, {ozet_sutunu} yayin_zamani
                 FROM belgeler WHERE {" AND ".join(kosullar)}
                 ORDER BY yayin_zamani DESC LIMIT ?""",
             parametreler,
         ).fetchall()
-    return [dict(s) for s in satirlar]
+    if ozetli:
+        return [dict(s) for s in satirlar]
+    # Başlık modunda JSON yerine düz satır: her belgede tekrar eden alan adları ("id", "kaynak", …)
+    # token'ın yarısını yiyordu. Aynı bilgi, yarı yer.
+    return [
+        " · ".join(filter(None, [str(s["id"]), s["kaynak"], s["sembol"], s["yayin_zamani"][5:10], s["baslik"]]))
+        for s in satirlar
+    ]
 
 
 @server.tool()
@@ -105,6 +122,44 @@ def belge(belge_id: int) -> dict:
         # ToolError: SDK yalnız bu türün mesajını modele iletir; başka hata "Error executing tool" olur.
         raise ToolError(f"{belge_id} numaralı belge yok.")
     return dict(satir)
+
+
+ISTANBUL = ZoneInfo("Europe/Istanbul")
+SEANS_KAPANIS = (18, 10)  # 18:00 kapanış + kapanış seansı payı
+
+
+@server.tool()
+def fiyat_hareketleri(gun: int = 3) -> list[dict]:
+    """BIST 30'un son N işlem günündeki fiyat değişimi ve hacim oranı; en çok yükselenden düşene.
+
+    hacim_orani: son günün hacmi / ondan önceki 20 işlem gününün ortalaması. 2'nin üstü olağandışı.
+    kesin=False ise son gün bugündür ve seans henüz kapanmamıştır: fiyat anlık, hacim eksik.
+
+    Args:
+        gun: kaç işlem günü geriye bakılsın (1-15)
+    """
+    gun = max(1, min(gun, 15))
+    with _baglan() as db:
+        satirlar = db.execute(
+            """WITH s AS (
+                   SELECT sembol, tarih, kapanis, hacim,
+                          ROW_NUMBER() OVER (PARTITION BY sembol ORDER BY tarih DESC) AS sira
+                   FROM fiyatlar)
+               SELECT son.sembol, once.tarih AS baslangic, son.tarih AS son_tarih, son.kapanis,
+                      round(100.0 * (son.kapanis - once.kapanis) / once.kapanis, 2) AS degisim_yuzde,
+                      round(son.hacim / (SELECT avg(h.hacim) FROM s h
+                                         WHERE h.sembol = son.sembol AND h.sira BETWEEN 2 AND 21), 2)
+                          AS hacim_orani
+               FROM s son JOIN s once ON once.sembol = son.sembol AND once.sira = son.sira + ?
+               WHERE son.sira = 1
+               ORDER BY degisim_yuzde DESC""",
+            (gun,),
+        ).fetchall()
+
+    simdi = datetime.now(ISTANBUL)
+    bugun = simdi.strftime("%Y-%m-%d")
+    seans_bitti = (simdi.hour, simdi.minute) >= SEANS_KAPANIS
+    return [{**dict(s), "kesin": s["son_tarih"] != bugun or seans_bitti} for s in satirlar]
 
 
 if __name__ == "__main__":
