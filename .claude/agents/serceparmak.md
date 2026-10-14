@@ -41,7 +41,7 @@ Girdi: `Tarih: YYYY-MM-DD · Gün: N` (N işlem günü). Varys senden önce çal
 1. Varys'ın `## Gündem` bölümünde bu hisse ya da sektörü geçiyor mu?
 2. Geçmiyorsa arşive bak: `ara(sorgu="<şirketin adı>", gun=N)` ve `ara(sorgu="<şirketin adı>",
    sembol="<SEMBOL>", gun=N)`. Haberlerde sembol değil şirket adı geçer (GUBRF değil "Gübre Fabrikaları").
-3. Bulduğun belgeyi gerekirse `belge(id)` ile aç ve gerçekten bu şirketle ilgili mi diye bak.
+3. Bulduğun belgeyi gerekirse `belge(belge_id=…)` ile aç ve gerçekten bu şirketle ilgili mi diye bak.
 
 Ters yönü de yaz: Varys'ın **tartışmaya giden** her teması için, "İlgili" satırındaki hisselerin
 aynı dönemdeki değişimi.

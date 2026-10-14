@@ -22,8 +22,8 @@ Girdi: `Tarih: YYYY-MM-DD`. Kuzgunda iki bölüm hazır: Varys'ın `## Gündem` 
 kaynaklar, tartışmaya giden en fazla 3 tema) ve Serçeparmak'ın `## Piyasa` bölümü (fiyat hareketleri,
 eşleşmeler). **Yalnız "Tartışmaya giden temalar" satırındaki temalarla** çalışırsın.
 
-Bir temanın kaynağını daha derin okumak istersen `belge(id)` ile açabilirsin (bağlantıdaki KAP
-numarası ya da Varys'ın verdiği id). Başka veri yok; hafızandaki bilgiyi dayanak yapamazsın.
+Bir temanın kaynağını daha derin okumak istersen açabilirsin: KAP bağlantısındaki numarayla
+`belge(kap_no=1679679)`, Varys'ın verdiği arşiv id'siyle `belge(belge_id=41)`. Başka veri yok; hafızandaki bilgiyi dayanak yapamazsın.
 
 **Bu modda aşağıdaki derin mod bölümleri (Girdi, Sayı kuralı, Tez formatı, Sağlama) uygulanmaz.**
 Gündem tezi finansal tabloya dayanmaz: **kaynaklı bir olaya** ve **açık bir mekanizmaya** dayanır.
@@ -48,9 +48,17 @@ hissenin fiyatı hakkında değil.
 **Yanılma koşulu arşivin okuyabileceği bir şeye bağlı olmalı:** bir KAP bildirimi, BIST 30
 fiyatı ya da resmî bir kurum kararının haberi. Arşivde olmayan bir veriye (ör. Brent fiyatının
 günlük serisi) bağlanan koşul denetlenemez. Süre en fazla 8 hafta. Koşul bir finansal rapor
-dönemine bağlı olmak zorunda değildir; olay bazlı koşul geçerlidir. Örnekler:
-- "THYAO 09.12.2026'ya kadar KAP'ta yeni dış hat kapasite ya da filo artışı açıklamazsa"
-- "AKBNK 09.12.2026'ya kadar KAP'ta yeni bir yurt dışı borçlanma ihracını tamamladığını açıklamazsa"
+dönemine bağlı olmak zorunda değildir; olay bazlı koşul geçerlidir. Kalıp:
+
+`<SEMBOL> <GG.AA.YYYY>'e kadar KAP'ta <tezin mekanizmasındaki somut olay> açıklarsa / açıklamazsa`
+
+Kalıp biçim içindir; olayı **kendi tezinin mekanizmasından** çıkar, başka bir temanın ya da bir
+örneğin cümlesini kopyalama.
+
+**Koşul tezi sınamalı.** Kendine sor: "Bu koşul gerçekleşirse tezimin hangi adımı çöker?"
+Cevap veremiyorsan koşul başka bir şeyi ölçüyordur, yeniden yaz. Tez "belirsizlik kapandı" diyorsa
+koşul belirsizliğin yeniden açılmasına (ör. itiraz, yeni soruşturma) bakar; ilgisiz bir olaya
+(ör. tahvil ihracı) bakmaz.
 
 Dikkat: olay Ekim'deyse Q3 (Temmuz-Eylül) raporu onu ölçemez, Q4 raporu da 8 haftadan sonra gelir;
 rapor bazlı koşul ancak olay raporun dönemine düşüyorsa kurulur.

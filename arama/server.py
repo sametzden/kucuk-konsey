@@ -105,22 +105,30 @@ def ara(sorgu: str, gun: int | None = None, tur: str | None = None,
 
 
 @server.tool()
-def belge(belge_id: int) -> dict:
+def belge(belge_id: int | None = None, kap_no: int | None = None) -> dict:
     """Tek bir belgenin tam kaydı: başlık, özet, tam metin (varsa), kaynak bağlantısı.
 
-    Args:
-        belge_id: son_belgeler ya da ara sonucundaki id
+    İkisinden birini ver:
+        belge_id: son_belgeler ya da ara sonucundaki id (ör. 41)
+        kap_no: KAP bildirim numarası, kuzgundaki KAP bağlantılarında yazan (ör. 1679679)
     """
+    if (belge_id is None) == (kap_no is None):
+        raise ToolError("belge_id ya da kap_no'dan yalnız birini ver.")
+    if belge_id is not None:
+        kosul, deger, ad = "id = ?", belge_id, f"{belge_id} numaralı belge"
+    else:
+        # KAP numarası veritabanında dis_id olarak metin saklanır.
+        kosul, deger, ad = "kaynak = 'KAP' AND dis_id = ?", str(kap_no), f"KAP {kap_no} bildirimi"
     with _baglan() as db:
         satir = db.execute(
-            """SELECT id, tur, kaynak, sembol, baslik, ozet, metin, url, yayin_zamani
-               FROM belgeler WHERE id = ?""",
-            (belge_id,),
+            f"""SELECT id, tur, kaynak, sembol, baslik, ozet, metin, url, yayin_zamani
+                FROM belgeler WHERE {kosul}""",
+            (deger,),
         ).fetchone()
     if satir is None:
         # Boş sözlük dönmüyoruz: ajan "belge boşmuş" diye yanlış okumasın.
         # ToolError: SDK yalnız bu türün mesajını modele iletir; başka hata "Error executing tool" olur.
-        raise ToolError(f"{belge_id} numaralı belge yok.")
+        raise ToolError(f"{ad} arşivde yok.")
     return dict(satir)
 
 

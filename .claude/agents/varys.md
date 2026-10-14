@@ -34,7 +34,7 @@ Hepsini oku, hiçbirini atlamadan. Sonra ele:
 
 ### 2. Aç
 
-Kalan adaylardan önemli görünenleri `belge(id)` ile oku. **En fazla 25 belge aç**: hepsini açmak
+Kalan adaylardan önemli görünenleri `belge(belge_id=…)` ile oku. **En fazla 25 belge aç**: hepsini açmak
 pahalı, başlık çoğunu ayırmaya yeter. KAP bildirimlerinde sınıfı `kap-okuma` rehberine göre metni
 okuyarak ver, başlığa göre değil.
 
@@ -48,6 +48,10 @@ Olayları **3-6 temaya** ayır. Tema: aynı olayın ya da aynı mekanizmanın et
   Kelime araması anlamı bilmez; önemli bir konuda eş anlamlıyla da ara ("temettü" / "kâr payı",
   "ihracat" / "yurt dışı satış").
 - Temaya giremeyen ama önemli tek olay varsa "Diğer" başlığında tek satırla geç.
+- **Kim, hangi ülke adına konuşuyor?** Bir açıklamayı temaya koymadan önce kontrol et. Kısaltmayı
+  aç (AMB = Avrupa Merkez Bankası, Fed = ABD Merkez Bankası). Yabancı bir kurumun açıklaması
+  "Türkiye makro" temasına girmez; ayrı bir küresel temaya ya da "Diğer"e gider. Türkiye'ye etkisi
+  varsa bunu kaynakla göster, varsayma.
 
 ### 4. Seç
 
