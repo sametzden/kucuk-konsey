@@ -26,7 +26,9 @@ maliyetin en büyük kalemi yakıt ve uçak finansmanıdır. Gelirin de borcun d
 
 _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 
-- yok
+- [[THYAO-ates-2026Q3-satis-gelirleri]] · ates · kontrol 2026Q3
+- [[THYAO-buz-2026Q3-brut-kar-marji]] · buz · kontrol 2026Q3
+- [[THYAO-buz-2026Q3-serbest-nakit-akim]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 

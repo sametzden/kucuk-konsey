@@ -25,7 +25,9 @@ Ham petrolü de ürünü de fiyatını kendisi belirlemez; kârı ikisi arasınd
 
 _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 
-- yok
+- [[TUPRS-ates-2026Q3-brut-kar-marji]] · ates · kontrol 2026Q3
+- [[TUPRS-ates-2026Q3-faaliyet-nakdi]] · ates · kontrol 2026Q3
+- [[TUPRS-buz-2026Q3-nakit-kar-buyume-farki]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 

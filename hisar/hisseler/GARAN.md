@@ -32,6 +32,7 @@ _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 - [[GARAN-ates-2026Q3-krediler]] · ates · kontrol 2026Q3
 - [[GARAN-buz-2026Q3-karsilik-kredi-orani]] · buz · kontrol 2026Q3
 - [[GARAN-buz-2026Q3-kredi-mevduat-orani]] · buz · kontrol 2026Q3
+- [[GARAN-buz-2026Q3-faiz-komisyon-buyume-farki]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 

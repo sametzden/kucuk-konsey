@@ -29,6 +29,7 @@ _(tarihli iddialar; Bran Birim 4'te gerçekleşeni kontrol edecek)_
 - [[EREGL-ates-2026Q3-brut-kar-marji]] · ates · kontrol 2026Q3
 - [[EREGL-buz-2026Q3-yurtdisi-satislar]] · buz · kontrol 2026Q3
 - [[EREGL-buz-2026Q3-capex]] · buz · kontrol 2026Q3
+- [[EREGL-buz-2026Q3-faaliyet-nakdi]] · buz · kontrol 2026Q3
 
 ## Önemli bildirimler
 
