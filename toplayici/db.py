@@ -38,6 +38,37 @@ CREATE TABLE IF NOT EXISTS fiyatlar (
     hacim   REAL,
     PRIMARY KEY (sembol, tarih)
 );
+
+-- Tam metin arama dizini (FTS5). Metni ikinci kez saklamaz (content=''), sadece hangi kelime
+-- hangi belgede geçiyor onu tutar; rowid = belgeler.id. Sıralama BM25 ile.
+-- remove_diacritics 2: ş→s, ç→c, ğ→g, İ→i ("sirket" yazan "şirket"i bulur).
+CREATE VIRTUAL TABLE IF NOT EXISTS belgeler_fts USING fts5(
+    baslik, ozet, metin,
+    content = '', contentless_delete = 1,
+    tokenize = 'unicode61 remove_diacritics 2'
+);
+
+-- Tetikleyiciler: belgeler'e yazılan her satır dizine de kendiliğinden yazılır, unutmak mümkün değil.
+-- replace('ı','i'): dizin "I"yı "i"ye çeviriyor ama "ı"ya dokunmuyor; "IŞIK" ile "ışık" ancak
+-- ikisi de "isik" olunca buluşur. Sorgu tarafında aynı çeviriyi arama kodu yapar.
+CREATE TRIGGER IF NOT EXISTS belgeler_fts_ekle AFTER INSERT ON belgeler BEGIN
+    INSERT INTO belgeler_fts (rowid, baslik, ozet, metin) VALUES (
+        new.id,
+        replace(new.baslik, 'ı', 'i'),
+        replace(coalesce(new.ozet, ''), 'ı', 'i'),
+        replace(coalesce(new.metin, ''), 'ı', 'i'));
+END;
+CREATE TRIGGER IF NOT EXISTS belgeler_fts_sil AFTER DELETE ON belgeler BEGIN
+    DELETE FROM belgeler_fts WHERE rowid = old.id;
+END;
+"""
+
+# Tetikleyiciler yalnız yeni satırları görür. Dizin ilk kez kurulduğunda eski satırları bir kez doldurur.
+DIZINI_DOLDUR = """
+INSERT INTO belgeler_fts (rowid, baslik, ozet, metin)
+SELECT id, replace(baslik, 'ı', 'i'), replace(coalesce(ozet, ''), 'ı', 'i'),
+       replace(coalesce(metin, ''), 'ı', 'i')
+FROM belgeler
 """
 
 
@@ -46,5 +77,10 @@ def baglan(yol: Path = DB_YOLU) -> sqlite3.Connection:
     db = sqlite3.connect(yol)
     db.row_factory = sqlite3.Row          # satırlara sütun adıyla erişim: satir["baslik"]
     db.execute("PRAGMA journal_mode=WAL")  # toplayıcı yazarken ajanlar okuyabilsin
+    dizin_yoktu = db.execute(
+        "SELECT 1 FROM sqlite_master WHERE name = 'belgeler_fts'").fetchone() is None
     db.executescript(SEMA)                 # IF NOT EXISTS: her bağlantıda güvenle çalışır
+    if dizin_yoktu:
+        db.execute(DIZINI_DOLDUR)
+        db.commit()
     return db
