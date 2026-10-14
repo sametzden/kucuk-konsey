@@ -1,0 +1,9 @@
+[Unit]
+Description=Küçük Konsey toplayıcı: KAP, haber ve fiyatı SQLite'a yazar
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Projects/kucuk-konsey
+ExecStart=%h/.local/bin/uv run python -m toplayici
+# KAP yavaş ve engellenebilir; takılırsa 30 dk sonra öldür
+TimeoutStartSec=30min
