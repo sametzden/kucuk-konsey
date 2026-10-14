@@ -52,7 +52,10 @@ kalemi, hangi yolla: "kredi büyümesi yavaşlarsa bankaların net faiz geliri�
 fiyatı ya da resmî bir kurum kararının haberi. Süre en fazla 8 hafta. Koşul bir finansal rapor
 dönemine bağlı olmak zorunda değildir; olay bazlı koşul geçerlidir. Örnekler:
 - "PGSUS 09.12.2026'ya kadar KAP'ta yakıt maliyeti kaynaklı bir hedef ya da beklenti revizyonu açıklamazsa"
-- "AKBNK'ın Q3 raporunda (Kasım) ceza için ayrı bir karşılık ya da gider kalemi görünmüyorsa"
+- "THYAO 09.12.2026'ya kadar KAP'ta yıllık hedeflerini koruduğunu açıklarsa"
+
+Dikkat: olay Ekim'deyse Q3 (Temmuz-Eylül) raporu onu ölçemez, Q4 raporu da 8 haftadan sonra gelir;
+rapor bazlı koşul ancak olay raporun dönemine düşüyorsa kurulur.
 
 **Güç etiketi:**
 - **güçlü:** resmî kaynak (KAP) + mekanizma doğrudan + büyüklük biliniyor

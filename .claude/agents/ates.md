@@ -50,7 +50,10 @@ fiyatı ya da resmî bir kurum kararının haberi. Arşivde olmayan bir veriye (
 günlük serisi) bağlanan koşul denetlenemez. Süre en fazla 8 hafta. Koşul bir finansal rapor
 dönemine bağlı olmak zorunda değildir; olay bazlı koşul geçerlidir. Örnekler:
 - "THYAO 09.12.2026'ya kadar KAP'ta yeni dış hat kapasite ya da filo artışı açıklamazsa"
-- "TUPRS'ın Q3 raporunda (Kasım) rafineri marjı geçen yılın aynı dönemine göre düşmüşse"
+- "AKBNK 09.12.2026'ya kadar KAP'ta yeni bir yurt dışı borçlanma ihracını tamamladığını açıklamazsa"
+
+Dikkat: olay Ekim'deyse Q3 (Temmuz-Eylül) raporu onu ölçemez, Q4 raporu da 8 haftadan sonra gelir;
+rapor bazlı koşul ancak olay raporun dönemine düşüyorsa kurulur.
 
 **Güç etiketi:**
 - **güçlü:** resmî kaynak (KAP) + mekanizma doğrudan + büyüklük biliniyor
