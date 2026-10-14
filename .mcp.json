@@ -3,7 +3,11 @@
     "borsa": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/saidsurucu/borsa-mcp@73a9df3e6e0e25a3e986514667301b110880dbc0", "borsa-mcp"]
+      "args": [
+        "--from",
+        "git+https://github.com/saidsurucu/borsa-mcp@73a9df3e6e0e25a3e986514667301b110880dbc0",
+        "borsa-mcp"
+      ]
     },
     "borsa-uzak": {
       "type": "http",
@@ -12,7 +16,22 @@
     "kap": {
       "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "kap.server"]
+      "args": [
+        "run",
+        "python",
+        "-m",
+        "kap.server"
+      ]
+    },
+    "arsiv": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "-m",
+        "arama.server"
+      ]
     }
   }
 }

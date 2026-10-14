@@ -19,6 +19,7 @@ from pathlib import Path
 import borsapy as bp
 import httpx
 from mcp.server.mcpserver import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 
 from kap.metin import bildirim_metni
 
@@ -60,7 +61,7 @@ def kap_bildirimleri(sembol: str, limit: int = 10) -> list[dict]:
     if df is None or df.empty:
         # Gerçek bir hissenin geçmişinde her zaman bildirim vardır; boşsa ya sembol yanlış
         # ya kaynak bozuk. İkisi de ajanın bilmesi gereken bir hata, "bildirim yok" değil.
-        raise ValueError(f"{sembol} için KAP listesi boş geldi: sembol yanlış veya kaynak bozuk.")
+        raise ToolError(f"{sembol} için KAP listesi boş geldi: sembol yanlış veya kaynak bozuk.")
 
     veri = [
         {
@@ -84,7 +85,7 @@ def kap_bildirim_metni(bildirim_id: str) -> dict:
     """
     bildirim_id = bildirim_id.strip()
     if not bildirim_id.isdigit():
-        raise ValueError("bildirim_id sadece rakamlardan oluşmalı, ör. 1665180")
+        raise ToolError("bildirim_id sadece rakamlardan oluşmalı, ör. 1665180")
 
     dosya = CACHE_DIR / f"{bildirim_id}.json"
     if dosya.exists():
