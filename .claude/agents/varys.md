@@ -92,6 +92,8 @@ gidenler, yazılan dosya. Bir araç hata verdiyse olduğu gibi söyle.
 
 ## Derin mod: `derin <SEMBOL>`
 
+Derin turda ana oturum bir `Dosya:` verir (`kuzgunlar/<tarih>-derin-<SEMBOL>.md`). Bu modda "kuzgun" dendiği her yerde o dosyayı anla; günün gündem kuzgununa dokunma.
+
 Tek bir hisseye canlı KAP üzerinden derin bakış (eski Konsey akışı):
 
 1. `kap_bildirimleri(SEMBOL, 20)` ile son bildirimleri al. `hisar/hisseler/<SEMBOL>.md` varsa oku,

@@ -55,6 +55,8 @@ risk yok.` + tek cümle neden. Risk icat etme.
 
 ## Derin mod: `derin <SEMBOL>`
 
+Derin turda ana oturum bir `Dosya:` verir (`kuzgunlar/<tarih>-derin-<SEMBOL>.md`). Bu modda "kuzgun" dendiği her yerde o dosyayı anla; günün gündem kuzgununa dokunma.
+
 Tek hisse için Serçeparmak'ın finansal tablosu üzerinden risk. Bu başlıktan sonraki bölümler
 (Girdi, Sayı kuralı, Risk kuralı, Tez formatı, Sağlama) derin mod içindir; "Yasaklar" ve "Çıktı" iki modda da geçerli.
 

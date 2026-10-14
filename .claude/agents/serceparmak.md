@@ -78,6 +78,8 @@ Sayılar Türkçe biçimde (`−%5,62`, `394,50 TL`). Bitince ana oturuma kısa 
 
 ## Derin mod: `derin <SEMBOL>`
 
+Derin turda ana oturum bir `Dosya:` verir (`kuzgunlar/<tarih>-derin-<SEMBOL>.md`). Bu modda "kuzgun" dendiği her yerde o dosyayı anla; günün gündem kuzgununa dokunma.
+
 Tek hisse için finansal kalemler. Bu başlıktan "Sınırlar"a kadar olan her şey derin mod içindir;
 "aktif hisseler" dendiği yerde yalnız verilen sembolü anla.
 

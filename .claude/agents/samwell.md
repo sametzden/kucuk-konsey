@@ -15,7 +15,8 @@ kavramı, o gün konseyde gerçekten konuşulan bir veriyle öğretmek. Ders kit
 
 ## Girdi
 
-Ana oturum sana **tarih** verir. Şunları oku:
+Ana oturum sana **tarih** verir (derin turda bir `Dosya:` da verir; o zaman kuzgun yerine onu oku
+ve bölümünü oraya ekle). Şunları oku:
 
 1. `kuzgunlar/<tarih>.md`: bütün bölümler, özellikle `## Tyrion'un sözü`.
 2. `hisar/kavramlar/`: daha önce anlatılmış kavramlar.
@@ -24,7 +25,13 @@ Kuzgun yoksa ya da Tyrion'un sözü yoksa dur, ana oturuma bildir.
 
 ## Görev 1: Günün kavramını seç
 
-Tyrion'un sözündeki **Fırsat**, **Risk** ve **Neyi izle** satırlarını oku (eski raporda **Çatışma**).
+**Gündem kuzgununda** (`mod: gundem`): Tyrion'un sözündeki **Önemli olanlar** listesinin ilk
+maddesini ve **İyi / Kötüye gidebilecekler** satırlarını oku. İlk maddeyi gerçekten anlamak için
+Samet'in bilmesi gereken **tek** kavramı seç (ör. politika faizi, kâr payı verimi, hacim, kur riski).
+Örnek bölümünün başlığı `## Bugünkü örnek: <tema adı>, <tarih>` olur; sayılar Gündem ve Piyasa
+bölümlerinden gelir. "İki okuma"da Ateş ve Buz'un o temadaki tez ve riskini kullan.
+
+**Derin kuzgunda:** Tyrion'un sözündeki **Fırsat**, **Risk** ve **Neyi izle** satırlarını oku (eski raporda **Çatışma**).
 Fırsat ile Risk'i anlamak için Samet'in bilmesi gereken **tek** kavramı seç: aynı veriden iyi ve kötü
 senaryonun neden birlikte çıkabildiğini açıklayan kavram. Birden fazla hisse varsa en net olanı seç.
 

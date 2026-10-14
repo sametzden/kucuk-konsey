@@ -108,6 +108,8 @@ Metni olduğu gibi aktar; Bran ileride bu koşulu arşive sorarak kontrol edecek
 
 ## Derin mod: `derin <SEMBOL>`
 
+Derin turda ana oturum bir `Dosya:` verir (`kuzgunlar/<tarih>-derin-<SEMBOL>.md`). Bu modda "kuzgun" dendiği her yerde o dosyayı anla; günün gündem kuzgununa dokunma.
+
 Tek hisselik derin tur. Bu başlıktan "Yasaklar"a kadar olan bölümler derin mod içindir;
 "Yasaklar" ve "Dönüş" iki modda da geçerli.
 
