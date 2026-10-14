@@ -181,7 +181,7 @@ karar vermek senin işin değil, farkı görünür kılmak senin işin.
 
 | Durum | Belirti | Ne yapacaksın |
 | --- | --- | --- |
-| **Araç yok** | `mcp__borsa__*` araçları listende hiç yok | Hiç deneme. Ana oturuma **"borsa MCP bağlı değil"** diye dön. Bu veri sorunu değil, bağlantı sorunu — `scripts/uyandir.sh` çalıştırılıp oturumun yeniden açılması gerekir |
+| **Araç yok** | `mcp__borsa__*` araçları listende hiç yok | Hiç deneme. Ana oturuma **"borsa MCP bağlı değil"** diye dön. Bu veri sorunu değil, bağlantı sorunu, oturumun yeniden açılması gerekir |
 | **Geçici hata** | 503, 502, 504, zaman aşımı, "no available server" | **Bir kez daha dene** (sunucu uykudan uyanıyor olabilir, ilk istek ~13 sn sürebilir). İkinci denemede de olmazsa okunamadı yaz |
 | **Kalıcı hata** | "sembol bulunamadı", `failed_count > 0`, boş veri | Tekrar deneme, anlamsız. Kalemi "Okunamayanlar"a yaz, sebebini belirt |
 

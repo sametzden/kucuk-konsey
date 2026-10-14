@@ -1,43 +1,30 @@
 // Veri katmanı: ajanların yazdığı kuzgun markdown dosyasını okur, arayüzün ihtiyacı olanı çıkarır.
 // React'ten bağımsız; ileride başka bir ekran da aynı fonksiyonları kullanabilir.
 
-export type Soz = { sembol: string; bugun: string; catisma: string; cozecek: string; dikkat?: string; neden?: string; firsat?: string; risk?: string }
-export type Muhur = { sembol: string; tarih: string; baslik: string; kap?: string; url?: string }
-export type Kuzgun = { tarih: string; soz: Soz[]; muhurler: Muhur[]; hisseler: string[]; metin: string; dunya?: string }
+export type Kuzgun = { tarih: string; mod: string; metin: string }
 
-function bolum(metin: string, baslik: string): string {
-  // "## <baslik>" ile bir sonraki "## " arasındaki metin
-  const bas = metin.indexOf(`## ${baslik}`)
+export function ayikla(tarih: string, ham: string): Kuzgun {
+  // Frontmatter (--- ... ---) gövdeden ayrılır; içindeki "mod:" satırı turun türünü söyler.
+  const on = ham.match(/^---\n([\s\S]*?)\n---\n?/)
+  const mod = on?.[1].match(/^mod:\s*(\S+)/m)?.[1] ?? ''
+  return { tarih, mod, metin: on ? ham.slice(on[0].length) : ham }
+}
+
+function altBolum(metin: string, seviye: string, baslik: string): string {
+  // "<seviye> <baslik>" satırı ile aynı ya da daha üst seviyedeki bir sonraki başlık arasındaki gövde
+  const satirlar = metin.split('\n')
+  const bas = satirlar.findIndex((s) => s.trim() === `${seviye} ${baslik}`)
   if (bas < 0) return ''
-  const son = metin.indexOf('\n## ', bas + 3)
-  return metin.slice(bas, son < 0 ? undefined : son)
+  const ust = new RegExp(`^#{1,${seviye.length}} `)
+  const son = satirlar.findIndex((s, i) => i > bas && ust.test(s))
+  return satirlar.slice(bas + 1, son < 0 ? undefined : son).join('\n').trim()
 }
 
-function sozuAyikla(metin: string): Soz[] {
-  const blok = bolum(metin, "Tyrion'un sözü")
-  const parcalar = blok.split(/\n\*\*([A-Z]{4,6})\*\*\n/).slice(1) // [sembol, içerik, sembol, içerik, ...]
-  const sonuc: Soz[] = []
-  for (let i = 0; i < parcalar.length; i += 2) {
-    const alan = (ad: string) => parcalar[i + 1].match(new RegExp(`\\*\\*${ad}:\\*\\*\\s*(.+)`))?.[1]?.trim() ?? ''
-    sonuc.push({ sembol: parcalar[i], bugun: alan('Bugün'), catisma: alan('Çatışma'), cozecek: alan('Neyi izle') || alan('Çözecek veri'), dikkat: alan('Dikkat') || undefined, neden: alan('Neden önemli'), firsat: alan('Fırsat'), risk: alan('Risk') })
-  }
-  return sonuc
-}
-
-function muhurleriAyikla(metin: string, hisseler: string[]): Muhur[] {
-  // Varys'ın kırmızı işaretli (🔴) bildirimleri: "### 🔴 23.09.2026 · Başlık · [KAP 123](url)"
-  return hisseler.flatMap((sembol) =>
-    [...bolum(metin, sembol).matchAll(/^### 🔴 (\S+) · (.+?)(?: · \[(KAP \d+)\]\((\S+)\))?$/gm)].map((m) => ({
-      sembol, tarih: m[1].slice(0, 5), baslik: m[2].replace(/ · \[.*$/, ''), kap: m[3], url: m[4],
-    })),
-  )
-}
-
-export function ayikla(tarih: string, metin: string): Kuzgun {
-  const hisseler = [...metin.matchAll(/^## ([A-Z]{4,6})$/gm)].map((m) => m[1])
-  // Tyrion'un sözündeki, hisse kartlarından önce gelen tek "**Dünya:**" satırı (Varys'ın Gündem'inden)
-  const dunya = bolum(metin, "Tyrion'un sözü").match(/^\*\*Dünya:\*\*\s*(.+)$/m)?.[1]?.trim()
-  return { tarih, metin, soz: sozuAyikla(metin), muhurler: muhurleriAyikla(metin, hisseler), hisseler, dunya }
+// yol: "Gündem" ya da "Tartışma/Ateş" (## bölüm, isteğe bağlı ### alt bölüm). Yoksa boş metin.
+export function bolum(kuzgun: Kuzgun, yol: string): string {
+  const [ana, alt] = yol.split('/')
+  const govde = altBolum(kuzgun.metin, '##', ana)
+  return alt ? altBolum(govde, '###', alt) : govde
 }
 
 export async function sonKuzgun(signal?: AbortSignal): Promise<Kuzgun | null> {

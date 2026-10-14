@@ -1,25 +1,33 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { ayikla } from './kuzgun.ts'
+import { ayikla, bolum } from './kuzgun.ts'
+import { AJANLAR } from './ajanlar.ts'
 
-test('v2 gerçek raporu beş kart ve kaynaklı mühürlerle okur', () => {
-  const text = readFileSync(new URL('../../kuzgunlar/2026-09-23.md', import.meta.url), 'utf8')
-  const result = ayikla('2026-09-23', text)
-  assert.equal(result.soz.length, 5)
-  assert.ok(result.soz.every(s => s.neden && s.firsat && s.risk && s.cozecek))
-  assert.ok(result.muhurler.some(m => m.kap === 'KAP 1666885' && m.url?.startsWith('https://')))
+const gercek = () => ayikla('2026-10-14', readFileSync(new URL('../../kuzgunlar/2026-10-14.md', import.meta.url), 'utf8'))
+
+test('frontmatter gövdeden ayrılır, mod okunur', () => {
+  const k = gercek()
+  assert.equal(k.mod, 'gundem')
+  assert.ok(k.metin.startsWith('# Kuzgun'))
 })
-test('eski biçimde çatışma ve çözecek veri korunur', () => {
-  const result = ayikla('2026-09-22', "## Tyrion'un sözü\n\n**ASELS**\n- **Bugün:** Olay\n- **Çatışma:** İki okuma\n- **Çözecek veri:** Nakit\n## ASELS\n")
-  assert.equal(result.soz[0].catisma, 'İki okuma')
-  assert.equal(result.soz[0].cozecek, 'Nakit')
+test('gerçek gündem raporunda her ajanın bölümü dolu', () => {
+  const k = gercek()
+  for (const a of AJANLAR) assert.ok(bolum(k, a.bolum), `${a.ad} bölümü boş`)
 })
-test('yarım rapor sahte özet üretmez', () => {
-  assert.deepEqual(ayikla('2026-09-23', '## ASELS\nToplanıyor').soz, [])
+test('Ateş ve Buz birbirinin metnini almaz', () => {
+  const k = gercek()
+  assert.ok(!bolum(k, 'Tartışma/Ateş').includes('Şüpheli içerik'))
+  assert.ok(bolum(k, 'Tartışma/Buz').includes('Şüpheli içerik'))
 })
-test('Dünya satırı hisse kartlarından ayrı okunur', () => {
-  const result = ayikla('2026-09-24', "## Tyrion'un sözü\n\n**Dünya:** Fed faizi sabit tuttu.\n\n**ASELS**\n- **Bugün:** Olay\n## ASELS\n")
-  assert.equal(result.dunya, 'Fed faizi sabit tuttu.')
-  assert.equal(result.soz.length, 1)
+test('bölüm, içindeki ### başlıklarla bölünmez; sonraki ## başlıkta biter', () => {
+  const k = ayikla('2026-10-15', '## Gündem\n### Tema\n- satır\n## Piyasa\ntablo\n')
+  assert.equal(bolum(k, 'Gündem'), '### Tema\n- satır')
+  assert.equal(bolum(k, 'Piyasa'), 'tablo')
+})
+test('olmayan bölüm boş döner, sahte içerik üretmez', () => {
+  const k = ayikla('2026-10-15', '## Gündem\nToplanıyor')
+  assert.equal(bolum(k, "Tyrion'un sözü"), '')
+  assert.equal(bolum(k, 'Tartışma/Ateş'), '')
+  assert.equal(k.mod, '')
 })

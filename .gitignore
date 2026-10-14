@@ -5,3 +5,13 @@ __pycache__/
 .cache/
 .obsidian/
 veri/
+
+# Yerel çalışma notları ve eski ya da kullanılmayan dosyalar: diskte kalır, GitHub'a gitmez
+PLAN.md
+docs/yeni-yapi-taslak.md
+dilekceler/
+trace/
+tasarim/
+scripts/uyandir.sh
+hisar/gundem.md
+kuzgunlar/*-ilk-tur.md

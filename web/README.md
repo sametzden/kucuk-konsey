@@ -15,5 +15,6 @@ Sunucu hata verirse son okunabilen rapor hata mesajıyla korunur.
 Geliştirme: veri sunucusu açıkken başka terminalde `npm --prefix web run dev`.
 Vite /api isteklerini yerel veri sunucusuna aktarır. `vite preview` tek başına API sağlamaz.
 
-Özet v2: Bugün, Neden önemli, Fırsat, Risk, Neyi izle, isteğe bağlı Dikkat.
-Eski Çatışma/Çözecek veri biçimi de okunur. Özgün tezler teknik kayıt altında saklanır.
+Sahnede ya da masadaki sekmelerde bir ajana tıklanınca masada o ajanın kuzgundaki bölümü görünür
+(eşleme `src/ajanlar.ts` → `bolum`): Tyrion → Tyrion'un sözü, Varys → Gündem, Serçeparmak → Piyasa,
+Ateş/Buz → Tartışma altındaki kendi başlıkları, Samwell → Samwell. Bölüm yoksa "bölüm yok" yazılır.

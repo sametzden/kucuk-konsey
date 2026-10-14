@@ -1,7 +1,10 @@
 # Küçük Konsey
 
 Samet için BIST şirketlerinin KAP bildirimlerini okuyan, tartışan, özetleyen ve ona finansı öğreten
-ajan ekibi. Samet tahtta, ajanlar Küçük Konsey üyeleri. Dil Türkçe. Genel plan: `PLAN.md`.
+ajan ekibi. Samet tahtta, ajanlar Küçük Konsey üyeleri. Dil Türkçe.
+
+İki mod: **gündem** (`/konsey`, varsayılan: BIST 30 + haber arşivinden haftanın gündemi) ve
+**derin** (`/konsey derin <SEMBOL>`: tek hisse, canlı KAP + bilanço). Akış: `.claude/skills/konsey/SKILL.md`.
 
 ## Değişmez kurallar
 
@@ -16,7 +19,11 @@ ajan ekibi. Samet tahtta, ajanlar Küçük Konsey üyeleri. Dil Türkçe. Genel 
 
 ## Araçlar
 
-- `kap` MCP (bizim, `kap/server.py`): `kap_bildirimleri`, `kap_bildirim_metni`
+- **Toplayıcı** (`toplayici/`, LLM yok): KAP (BIST 30), 6 RSS kaynağı ve günlük fiyatları
+  `veri/konsey.db`'ye yazar. systemd timer ile 08:30 ve 20:00'de çalışır (`scripts/systemd/`).
+- `arsiv` MCP (bizim, `arama/server.py`, **salt okunur**): `son_belgeler`, `ara` (FTS5/BM25), `belge`,
+  `fiyat_hareketleri`. Gündem modunun tek veri kaynağı.
+- `kap` MCP (bizim, `kap/server.py`): `kap_bildirimleri`, `kap_bildirim_metni`. Derin modda canlı KAP.
 - `borsa` MCP (uzak): fiyat, bilanço, oranlar. **KAP araçları bozuk, kullanma.** Farklı araçlar aynı
   oran için farklı değer verebilir (ör. F/K 48,09 vs 41,21); hangi araçtan geldiğini yaz.
 
@@ -27,8 +34,8 @@ ajan ekibi. Samet tahtta, ajanlar Küçük Konsey üyeleri. Dil Türkçe. Genel 
 Sabitlemenin anlamı: yazar yeni kod gönderse de bizimki değişmez; sürümü **biz** güncelleriz (SHA'yı değiştirerek).
 
 Uzak sunucu (`borsa.surucu.dev`) `borsa-uzak` adıyla tanımlı ama kapalı (`settings.local.json` →
-`disabledMcpjsonServers`). 23.09'da uzak sunucu kesintiye girdi; ona dönülürse `./scripts/uyandir.sh && claude`
-yine gerekir. Araç adları iki durumda da aynı (`mcp__borsa__*`), ajanlar farkı görmez.
+`disabledMcpjsonServers`). 23.09'da uzak sunucu kesintiye girdi; ona dönülürse oturumdan önce sunucunun uyandırılması
+gerekir (ilk istek ~13 sn). Araç adları iki durumda da aynı (`mcp__borsa__*`), ajanlar farkı görmez.
 
 **Veri zinciri:** borsa-mcp'nin kendi verisi yok. Bilanço/gelir/nakit akış → `borsapy` → İş Yatırım; fiyat ve
 bazı oranlar → Yahoo Finance. Lokal kurulum Said'in sunucusunu zincirden çıkarır, İş Yatırım/Yahoo'yu çıkarmaz.
@@ -61,15 +68,16 @@ açılan dosya brief değil arıza kaydıdır, yeri oturum özetidir.
 | `hisar/hisseler/` | Hisse başına dosya: şirket özeti, açık tezler, önemli bildirimler |
 | `hisar/kavramlar/` | Samwell'in anlattığı kavramlar |
 | `hisar/iddialar/` | Tarihli iddialar (Bran haftalık kontrol eder) |
-| `kuzgunlar/` | Günlük brief: `YYYY-MM-DD.md` |
-| `dilekceler/` | Samet'in onayını bekleyen işler |
-| `trace/` | Ajan olay kayıtları (hook'lar yazar) |
+| `hisar/iddialar/tema-*.md` | Gündem modunun tarihli tema iddiaları |
+| `kuzgunlar/` | Brief: gündem `YYYY-MM-DD.md`, derin `YYYY-MM-DD-derin-<SEMBOL>.md` |
+| `veri/konsey.db` | Toplayıcının SQLite arşivi (git dışı) |
 
 Dosyalar Obsidian uyumlu: frontmatter + `[[wikilink]]`.
 
 ### İzlenen hisseler
 
-Liste hiçbir yerde sabit yazılı değildir: `hisar/hisseler/*.md` taranır, frontmatter'ında
+Gündem modu BIST 30'un tamamına bakar (üyeler `borsapy`'den canlı gelir). Aşağıdaki liste derin
+mod ve eski hisse dosyaları içindir. Liste hiçbir yerde sabit yazılı değildir: `hisar/hisseler/*.md` taranır, frontmatter'ında
 `izleme: aktif` olanlar konseye girer. Hisse eklemek dosya açmaktır, çıkarmak `pasif` yazmaktır —
 geçmiş silinmez.
 
