@@ -8,6 +8,8 @@ dependencies = [
     "borsapy",
     "beautifulsoup4",
     "httpx",
+    "sentence-transformers>=6.1.0",
+    "numpy>=2.5.3",
 ]
 
 [dependency-groups]

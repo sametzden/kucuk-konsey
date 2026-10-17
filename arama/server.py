@@ -2,7 +2,7 @@
 
 Dört araç:
   son_belgeler      → son N günün bildirim ve haberleri (gündem için, arama yapmadan)
-  ara               → kelime araması, alakaya göre sıralı
+  ara               → hibrit arama (kelime + anlam), alakaya göre sıralı
   belge             → tek belgenin tam metni
   fiyat_hareketleri → BIST 30'da son N işlem gününün değişimi ve hacim oranı
 
@@ -16,8 +16,8 @@ from zoneinfo import ZoneInfo
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 
+from arama.hibrit import ara as hibrit_ara
 from arama.kelime import EN_FAZLA, OZET_SINIRI
-from arama.kelime import ara as kelime_ara
 from toplayici.db import DB_YOLU
 
 server = MCPServer(
@@ -88,10 +88,11 @@ def son_belgeler(gun: int = 3, tur: str | None = None, ozetli: bool = False,
 @server.tool()
 def ara(sorgu: str, gun: int | None = None, tur: str | None = None,
         sembol: str | None = None, limit: int = 10) -> list[dict]:
-    """KAP bildirimleri ve haberlerde kelime araması; en alakalı önce. Tam metin dönmez, belge(id) ile al.
+    """KAP bildirimleri ve haberlerde arama; en alakalı önce. Tam metin dönmez, belge(id) ile al.
 
-    Kelime araması anlamı bilmez: "temettü" yazınca "kâr payı" geçen belgeyi bulmaz.
-    Önemli bir konuda eş anlamlı kelimeyle de ara.
+    Hem kelimeyle hem anlamla arar: "personel azaltımı" yazınca "işgücü" geçen belge de gelir.
+    Her sonuçta kaynak_sira: belgenin kelime ve anlam listelerinde kaçıncı olduğu.
+    Anlamsal arama özel adda zayıftır; şirket için sorgu yerine sembol süzgecini kullan.
 
     Args:
         sorgu: serbest metin, ör. "ihracat sözleşmesi". Türkçe ekler sorun değil.
@@ -101,7 +102,7 @@ def ara(sorgu: str, gun: int | None = None, tur: str | None = None,
         limit: kaç sonuç (1-50)
     """
     with _baglan() as db:
-        return kelime_ara(db, sorgu, gun=gun, tur=tur, sembol=sembol, limit=limit)
+        return hibrit_ara(db, sorgu, gun=gun, tur=tur, sembol=sembol, limit=limit)
 
 
 @server.tool()

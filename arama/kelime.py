@@ -16,6 +16,14 @@ KISA_KELIME = 3     # bundan kısa kelimeye * eklenmez: "ab*" yüzlerce alakası
 # Başlık 10, özet 5, metin 1: kelime başlıkta geçiyorsa belge büyük ihtimalle o konuda.
 AGIRLIK = "10.0, 5.0, 1.0"
 
+# Eşanlam listesi: sorguda soldaki kök geçerse sağdaki ifadeler de aranır. Ölçümle kanıtlanan
+# boşluklar için büyür, tahminle değil: "temettü" ne kelime ne anlamsal aramada bulunuyordu
+# (KAP başlığı "Kar Payı Dağıtım...", e5 "Temerrüt İşlemi" döndürdü). Kök yazılır, ek almış hali
+# de yakalansın ("temettüsü"). Değerler dizin biçiminde: küçük harf, ı yerine i.
+ESANLAM = {
+    "temett": ["kar payi"],
+}
+
 
 def fts_sorgusu(metin: str) -> str:
     """Serbest metni güvenli bir FTS5 sorgusuna çevirir.
@@ -33,8 +41,35 @@ def fts_sorgusu(metin: str) -> str:
         f'"{k}"*' if len(k) >= KISA_KELIME else f'"{k}"'
         for k in kelimeler
     ]
+    # İfade tırnak içinde: "kar payi" yan yana geçmeli, ayrı ayrı "kar" ve "payi" yetmez.
+    # Sondaki *, son kelimenin ek almış halini de tutar ("payini").
+    parcalar += [
+        f'"{ifade}"*'
+        for kok, ifadeler in ESANLAM.items() if any(k.startswith(kok) for k in kelimeler)
+        for ifade in ifadeler
+    ]
     # OR: kelimelerden biri geçen her belge aday; BM25 daha çok kelime tutanı zaten öne alır.
     return " OR ".join(parcalar)
+
+
+def filtreler(
+    *, gun: int | None = None, tur: str | None = None, sembol: str | None = None
+) -> tuple[list[str], list]:
+    """Ortak süzgeçler (b = belgeler tablosu): kelime ve anlamsal arama aynısını kullanır."""
+    kosullar, parametreler = [], []
+    if gun is not None:
+        sinir = datetime.now(timezone.utc) - timedelta(days=gun)
+        # Zamanları hep aynı biçimde (YYYY-MM-DDTHH:MM:SSZ) yazdığımız için metin
+        # karşılaştırması tarih karşılaştırmasıyla aynı sonucu verir.
+        kosullar.append("b.yayin_zamani >= ?")
+        parametreler.append(sinir.strftime("%Y-%m-%dT%H:%M:%SZ"))
+    if tur is not None:
+        kosullar.append("b.tur = ?")
+        parametreler.append(tur)
+    if sembol is not None:
+        kosullar.append("b.sembol = ?")
+        parametreler.append(sembol.upper())
+    return kosullar, parametreler
 
 
 def ara(
@@ -59,19 +94,9 @@ def ara(
     if not fts:
         return []
 
-    kosullar, parametreler = ["belgeler_fts MATCH ?"], [fts]
-    if gun is not None:
-        sinir = datetime.now(timezone.utc) - timedelta(days=gun)
-        # Zamanları hep aynı biçimde (YYYY-MM-DDTHH:MM:SSZ) yazdığımız için metin
-        # karşılaştırması tarih karşılaştırmasıyla aynı sonucu verir.
-        kosullar.append("b.yayin_zamani >= ?")
-        parametreler.append(sinir.strftime("%Y-%m-%dT%H:%M:%SZ"))
-    if tur is not None:
-        kosullar.append("b.tur = ?")
-        parametreler.append(tur)
-    if sembol is not None:
-        kosullar.append("b.sembol = ?")
-        parametreler.append(sembol.upper())
+    kosullar, parametreler = filtreler(gun=gun, tur=tur, sembol=sembol)
+    kosullar.insert(0, "belgeler_fts MATCH ?")
+    parametreler.insert(0, fts)
     parametreler.append(max(1, min(limit, EN_FAZLA)))
 
     satirlar = db.execute(

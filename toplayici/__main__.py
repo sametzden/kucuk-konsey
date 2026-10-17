@@ -1,4 +1,4 @@
-"""Üç toplayıcıyı sırayla çalıştırır. Zamanlayıcının çağırdığı tek komut budur.
+"""Üç toplayıcıyı sırayla çalıştırır, sonra yeni belgeleri vektöre çevirir. Zamanlayıcının çağırdığı tek komut budur.
 
 Çalıştır: uv run python -m toplayici
 
@@ -31,6 +31,17 @@ def main() -> int:
             print(f"[{ad}] ÇÖKTÜ\n{traceback.format_exc()}")
             continue
         print(f"[{ad}] {time.time() - baslangic:.0f} sn · {rapor}")
+
+    # Yeni belgelerin vektörleri. Veritabanında ekleme tetikleyicisi yok (SQL modeli çalıştıramaz),
+    # bu adım atlanırsa yeni belgeler yalnız kelime aramasında görünür, anlamsal aramada görünmez.
+    # Toplamadan sonra ve ayrı try içinde: GPU sorunu toplanan veriyi kaybettirmesin.
+    baslangic = time.time()
+    try:
+        from arama.anlam import eksikleri_doldur   # PyTorch'u yükler, yalnız bu adımda
+        print(f"[vektör] {time.time() - baslangic:.0f} sn · {eksikleri_doldur(db)} yeni belge")
+    except Exception:
+        basarisiz.append("vektör")
+        print(f"[vektör] ÇÖKTÜ\n{traceback.format_exc()}")
 
     # Çıkış kodu zamanlayıcıya durumu söyler: 0 başarılı, 1 en az biri çöktü.
     # KAP'ın tur ortasında durması çöküş değil, rapordaki "durdu" alanında görünür.

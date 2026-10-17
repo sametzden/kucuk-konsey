@@ -31,7 +31,10 @@
         "python",
         "-m",
         "arama.server"
-      ]
+      ],
+      "env": {
+        "HF_HUB_OFFLINE": "1"
+      }
     }
   }
 }

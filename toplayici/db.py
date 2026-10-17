@@ -61,6 +61,19 @@ END;
 CREATE TRIGGER IF NOT EXISTS belgeler_fts_sil AFTER DELETE ON belgeler BEGIN
     DELETE FROM belgeler_fts WHERE rowid = old.id;
 END;
+
+-- Anlamsal arama vektörleri (arama/anlam.py doldurur). 384 float32 = 1.536 bayt, BLOB olarak.
+-- model sütunu: başka bir modelin vektörü başka bir "dil"dir, karşılaştırılamaz; model değişince
+-- satır eskimiş sayılır ve yeniden üretilir.
+-- Ekleme tetikleyicisi yok: SQL modeli çalıştıramaz, vektörü Python üretir. Silme ise SQL'de kalır.
+CREATE TABLE IF NOT EXISTS belgeler_vektor (
+    belge_id INTEGER PRIMARY KEY,   -- = belgeler.id
+    model    TEXT NOT NULL,
+    vektor   BLOB NOT NULL
+);
+CREATE TRIGGER IF NOT EXISTS belgeler_vektor_sil AFTER DELETE ON belgeler BEGIN
+    DELETE FROM belgeler_vektor WHERE belge_id = old.id;
+END;
 """
 
 # Tetikleyiciler yalnız yeni satırları görür. Dizin ilk kez kurulduğunda eski satırları bir kez doldurur.
